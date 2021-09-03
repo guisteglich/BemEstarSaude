@@ -1,0 +1,9 @@
+<medicos>
+    <medico>
+        <nome>Guilherme</nome>
+        <endereco>Estr. Roberto</endereco>
+        <telefone>51997786199</telefone>
+        <especialidade>Cardiologia</especialidade>
+        <crm>3123</crm>
+    </medico>
+</medicos>
