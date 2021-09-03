@@ -2,7 +2,7 @@
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $nome = $telefone = $email = $especialidade = $crm = '';
+    $nome = $endereco = $telefone = $email = $especialidade = $crm = '';
 
     function input($data) {
         $data = trim($data);
@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="tel" name="telefone" id="telefone">
 
             <label>E-mail:</label>
-            <input type="email" name="nome" id="nome">
+            <input type="email" name="email" id="email">
 
             <label>Especialidade:</label>
             <input type="text" name="especialidade" id="especialidade">
