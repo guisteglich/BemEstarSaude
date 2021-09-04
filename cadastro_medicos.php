@@ -1,6 +1,6 @@
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST['cadastrar'])) {
 
     $nome = $endereco = $telefone = $email = $especialidade = $crm = '';
 
@@ -18,7 +18,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $especialidade = input($_POST['especialidade']);
     $crm = input($_POST['crm']);
     
-    $xml = simplexml_load_file("medicos.xml") or die ("Erro ao carregar arquivo!");
+    $xml = simplexml_load_file("users/medicos.xml") or die ("Erro ao carregar arquivo!");
+
+
+    echo "Esse é o xml: " . $xml;
 
     $node = $xml->addChild("medico");
     $node->addChild("nome", $nome);
@@ -28,11 +31,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $node->addChild("especialidade", $especialidade);
     $node->addChild("crm", $crm);
 
-    // $s = simplexml_import_dom($xml);
-    $s->saveXML ('medicos.xml');
+    $s = simplexml_import_dom($xml);
+    $s->saveXML ('users/medicos.xml');
 
     echo $xml->asXML();
-    }     
+}     
 
 ?>
 

@@ -1,0 +1,11 @@
+<pacientes>
+    <paciente>
+        <nome>Guilherme Steglich </nome>
+        <endereco>Alvício Scheffel </endereco>
+        <telefone> 5199786199 </telefone>
+        <email> guilhermesi@furg.br </email>
+        <genero> M </genero>
+        <idade> 21 </idade>
+        <cpf> 123456789 </cpf>
+    </paciente>
+</pacientes>
