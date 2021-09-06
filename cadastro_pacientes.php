@@ -90,3 +90,5 @@
             <br>
             <input type="submit" name="cadastrar" value="Cadastrar Paciente">
     </form>
+    </body>
+</html>

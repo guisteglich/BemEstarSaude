@@ -42,3 +42,5 @@
         <br>
         <input type="submit" name="AltMed" value="Alterar Dados">
     </form>
+    </body>
+</html>

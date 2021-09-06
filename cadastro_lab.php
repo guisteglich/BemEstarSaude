@@ -62,3 +62,5 @@ if(isset($_POST['cadastrar'])) {
         <br>
         <input type="submit" name="cadastrar" value="Cadastrar Laboratório">
     </form>
+    </body>
+</html>
