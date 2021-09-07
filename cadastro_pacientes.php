@@ -1,8 +1,9 @@
 <?php
+$error = false;
 
- $nome = $endereco = $telefone = $email = $genero = $idade = $cpf = '';
+$nome = $endereco = $telefone = $email = $genero = $idade = $cpf = '';
 
- if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST['cadastrar'])) {
     $nome = input($_POST["nome"]);
     $endereco = input($_POST["endereco"]);
     $telefone = input($_POST["telefone"]);
@@ -20,38 +21,32 @@
      return $data;
  }
     
-    $xml=simplexml_load_file("./users/pacientes.xml") or die ("Erro ao abrir o arquivo!");
+    $xml=simplexml_load_file("users/pacientes.xml") or die ("Erro ao abrir o arquivo de pacientes!");
 
+    foreach($xml->children() as $pa) {
+        if ($pa->cpf == $cpf) {
+            $error = true;
+        }
+    }
+    if ($error == false){
     $node = $xml->addChild("paciente"); 
     $node->addChild("nome", $nome);
     $node->addChild("endereco", $endereco);
-    $node->addChild("email", $email);
     $node->addChild("telefone", $telefone);
+    $node->addChild("email", $email);
     $node->addChild("genero", $genero);
     $node->addChild("idade", $idade);
     $node->addChild("cpf", $cpf);
-
-
+    
     $save = simplexml_import_dom($xml);
+    $save->saveXML ('users/pacientes.xml');
+    }
     
-    echo $save->saveXML("users/pacientes.xml");
-    
+    // echo $xml->asXML();
 
-    echo "<h2>Saída dos resultados:</h2>";
-    echo $nome;
-    echo "<br>";
-    echo $idade;
-    echo "<br>";
-    echo $senha;
-    echo "<br>";
-    echo $email;
-    echo "<br>";
-    echo $genero;
-    echo "<br>";
-    echo $idade;
-    echo "<br>";
-    echo $cpf;
-    echo "<br>";
+    foreach ($xml->children()  as $p){
+        echo "<br>Nome do paciente: " . $p->nome;
+    }
 
 ?>
 
@@ -90,5 +85,10 @@
             <br>
             <input type="submit" name="cadastrar" value="Cadastrar Paciente">
     </form>
+    <?php
+    if ($error  == true){
+        echo '<p> Paciente com esse CPF já está cadastrado! </p>' ; 
+    }
+    ?>
     </body>
 </html>

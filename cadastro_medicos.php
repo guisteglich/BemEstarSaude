@@ -18,10 +18,16 @@ if(isset($_POST['cadastrar'])) {
     $especialidade = input($_POST['especialidade']);
     $crm = input($_POST['crm']);
     
-    $xml = simplexml_load_file("users/medicos.xml") or die ("Erro ao carregar arquivo!");
+    $xml = simplexml_load_file("users/medicos.xml") or die ("Erro ao carregar arquivo de médicos!");
+
+    foreach($xml->children() as $md) {
+        if ($md->nome == $nome) {
+            $error = true;
+        }
+    }
 
 
-    echo "Esse é o xml: " . $xml;
+    // echo "Esse é o xml: " . $xml;
 
     $node = $xml->addChild("medico");
     $node->addChild("nome", $nome);
@@ -71,5 +77,10 @@ if(isset($_POST['cadastrar'])) {
             <br>
             <input type="submit" value="Cadastrar" name="cadastrar">
         </form>
+        <?php
+            if ($error  == true){
+                echo '<p> Médico com esse nome já cadastrado! </p>' ; 
+            }
+        ?>
     </body>
 </html>
