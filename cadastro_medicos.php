@@ -1,4 +1,5 @@
 <?php
+$error = false;
 
 if(isset($_POST['cadastrar'])) {
 

@@ -1,4 +1,5 @@
 <?php
+$error = false;
 
 if(isset($_POST['cadastrar'])) {
     $cnpj = $_POST['cnpj'];
@@ -10,6 +11,11 @@ if(isset($_POST['cadastrar'])) {
     $tipoexame = $_POST['tipoexame'];
     
     $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo!");
+    foreach($xml->children() as $lab) {
+        if ($lab->cnpj == $cnpj) {
+            $error = true;
+        }
+    }
 
 
     $add = $xml->addChild("lab"); 
@@ -62,5 +68,10 @@ if(isset($_POST['cadastrar'])) {
         <br>
         <input type="submit" name="cadastrar" value="Cadastrar Laboratório">
     </form>
+    <?php
+        if ($error  == true){
+            echo '<p> Laboratório com esse CNPJ já cadastrado! </p>' ; 
+        }
+        ?>
     </body>
 </html>
