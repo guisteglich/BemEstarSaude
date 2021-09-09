@@ -1,5 +1,5 @@
 <pacientes>
-    <paciente>
+    <!-- <paciente>
         <nome>Guilherme Steglich</nome>
         <endereco>Alvício Scheffel </endereco>
         <telefone> 5199786199 </telefone>
@@ -7,5 +7,5 @@
         <genero> M </genero>
         <idade> 21 </idade>
         <cpf> 123456789 </cpf>
-    </paciente>
+    </paciente> -->
 </pacientes>

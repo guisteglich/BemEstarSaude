@@ -1,6 +1,7 @@
 <?php
 
 $encontrado = false;
+$error = false;
 
 if(isset($_POST['BuscaPac'])) {
     $nome = $_POST['nome'];

@@ -3,9 +3,9 @@ $error = false;
 
 if(isset($_POST['cadastrar'])) {
     $cnpj = $_POST['cnpj'];
-    $senha = $_POST['senha'];
+    // $senha = $_POST['senha'];
     $nome = $_POST['nome'];
-    $end = $_POST['end'];
+    $end = $_POST['endereco'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $tipoexame = $_POST['tipoexame'];
@@ -21,14 +21,14 @@ if(isset($_POST['cadastrar'])) {
     $add = $xml->addChild("lab"); 
     $add -> addChild("cnpj", $cnpj);
     $add -> addChild("nome", $nome);
-    $add -> addChild("senha", $senha);
+    // $add -> addChild("senha", $senha);
     $add -> addChild("end", $end);
     $add -> addChild("telefone", $telefone);
     $add -> addChild("email", $email);
     $add -> addChild("tipoexame", $tipoexame);
 
     $s = simplexml_import_dom($xml);
-    $s->saveXML ('users/labs.xml');
+    $s->saveXML ('users/laboratorios.xml');
     
     echo $xml->asXML();
     
