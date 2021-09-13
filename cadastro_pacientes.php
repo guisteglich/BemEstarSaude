@@ -9,7 +9,7 @@ function input($data) {
     return $data;
 }
 
-if(isset($_POST['cadastrar'])) {
+if(isset($_POST['CadPac'])) {
     $nome = input($_POST["nome"]);
     $endereco = input($_POST["endereco"]);
     $telefone = input($_POST["telefone"]);
@@ -82,7 +82,7 @@ if(isset($_POST['cadastrar'])) {
             <label>CPF:</label>
             <input type="number" name="cpf" id="cpf">
             <br>
-            <input type="submit" name="cadastrar" value="Cadastrar Paciente">
+            <input type="submit" name="CadPac" value="Cadastrar Paciente">
     </form>
     <?php
     if ($error  == true){

@@ -1,0 +1,9 @@
+<exames>
+    <exame>
+        <cpf>111</cpf>
+        <cnpj>11</cnpj>
+        <data>20/04/2010</data>
+        <tipoexame>4</tipoexame>
+        <resultado>Positivo</resultado>
+    </exame>
+</exames

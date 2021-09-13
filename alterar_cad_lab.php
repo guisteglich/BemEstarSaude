@@ -1,3 +1,32 @@
+<?php
+$error = false;
+$sucesso = false;
+
+if(isset($_POST['AltMed'])) {
+    $contador = 0;
+    $posicao = 0;
+    $cnpj = $_POST['cnpj'];
+    $alterar = $_POST['trocado'];
+    $valor_novo = $_POST['valor_novo'];
+    
+    if ($_SESSION['cnpj'] == $cnpj) {
+        $xml=simplexml_load_file("users/laboratiorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
+        foreach($xml->children() as $sk) {
+            if ($sk->cnpj == $cnpj) {
+                // echo ("Achei a posicao no xml!"); //
+                $posicao = $contador;
+            }
+            $contador= $contador+1;
+        }
+        $xml->lab[$posicao]->$alterar = $valor_novo;
+        $s = simplexml_import_dom($xml);
+        $s->saveXML ('users/laboratorios.xml');
+        $sucesso = true;
+    }else{
+        $error = true;
+    }
+?>
+
 <!DOCTYPE html>
 
 <html>

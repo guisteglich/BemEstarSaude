@@ -1,3 +1,37 @@
+<?php
+$error = false;
+if(isset($_POST['cadastrar'])) {
+    $usuario = $_POST['login'];
+    $senha = $_POST['password'];
+    $contador = 0;
+    $posicao = 0;
+
+    $xml=simplexml_load_file("users/administradores.xml") or die ("Erro ao abrir arquivo de administradores!");
+
+    foreach($xml->children() as $sk) {
+        if ($sk->login == $usuario) {
+            $posicao = $contador;
+            echo $posicao;
+        }
+        $contador= $contador+1;
+    }   
+        if($usuario == $xml->adm[$posicao]->login){
+     
+            if($senha == $xml->adm[$posicao]->password){
+
+                session_start();
+                $_SESSION['login'] = $usuario;
+                header('Location: index.html');
+                die; 
+            }
+        }
+    
+    $error = true;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +49,19 @@
                     <img class='w-64' src="./public/images/logo2.png">
                 </div>
                 <label>Login</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="nome" id="nome">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="login" id="login">
 
                 <label>Senha</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="endereco" id="endereco">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="password" name="password" id="password">
                 <div class='flex flex-col justify-center items-center'>
                     <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Acessar" name="cadastrar">
                     <!-- <p>Cadastrar</p> -->
                 </div>
+                <?php
+                    if ($error) {
+                        echo '<p> Usuário ou senha inválida! </p>' ; 
+                    }
+                ?>
             </form>
         </div>
         <div class='h-full w-4/6 bg-center bg-cover bg-no-repeat' style="background-image: url('./public/images/bg_login.jpg')"></div>

@@ -1,7 +1,7 @@
 <?php
 $error = false;
 
-if(isset($_POST['cadastrar'])) {
+if(isset($_POST['CadMed'])) {
 
     $nome = $endereco = $telefone = $email = $especialidade = $crm = '';
 
@@ -39,7 +39,7 @@ if(isset($_POST['cadastrar'])) {
     $node->addChild("crm", $crm);
 
     $s = simplexml_import_dom($xml);
-    $s->saveXML ('users/medicos.xml');
+    $s->saveXML ('users/medicos.xml') or die ('Erro ao salvar');
 
     echo $xml->asXML();
 }     
@@ -80,7 +80,7 @@ if(isset($_POST['cadastrar'])) {
                 <label>CRM:</label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" name="crm" id="crm">
                 <div class='flex justify-center'>
-                    <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar" name="cadastrar">
+                    <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar" name="CadLab">
                 </div>
             </form>
         </div>

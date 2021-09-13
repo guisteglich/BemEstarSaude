@@ -1,7 +1,7 @@
 <?php
 $error = false;
 
-if(isset($_POST['cadastrar'])) {
+if(isset($_POST['CadLab'])) {
     $cnpj = $_POST['cnpj'];
     // $senha = $_POST['senha'];
     $nome = $_POST['nome'];
@@ -28,7 +28,7 @@ if(isset($_POST['cadastrar'])) {
     $add -> addChild("tipoexame", $tipoexame);
 
     $s = simplexml_import_dom($xml);
-    $s->saveXML ('users/laboratorios.xml');
+    $s->saveXML ('users/laboratorios.xml') or die ('Erro ao salvar');
     
     echo $xml->asXML();
     
@@ -66,7 +66,7 @@ if(isset($_POST['cadastrar'])) {
         <label>CNPJ: </label>
         <input type="number" id="cnpj" name="cnpj">
         <br>
-        <input type="submit" name="cadastrar" value="Cadastrar Laboratório">
+        <input type="submit" name="CadLab" value="Cadastrar Laboratório">
     </form>
     <?php
         if ($error  == true){
