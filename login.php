@@ -1,6 +1,9 @@
 <?php
 $error = false;
 if(isset($_POST['cadastrar'])) {
+    if (empty($_POST['login']) OR empty($_POST['password'])){
+        header('Location: login.php');
+    }
     $usuario = $_POST['login'];
     $senha = $_POST['password'];
     $contador = 0;
@@ -18,6 +21,9 @@ if(isset($_POST['cadastrar'])) {
         if($usuario == $xml->adm[$posicao]->login){
      
             if($senha == $xml->adm[$posicao]->password){
+                // $cookie_name = "user/" . $usuario;
+                // $cookie_value = $usuario;
+                // setcookie($cookie_name, $cookie_value, time() + (3600 * 3), "/"); // 3 horas
 
                 session_start();
                 $_SESSION['login'] = $usuario;
