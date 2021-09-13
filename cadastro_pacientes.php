@@ -3,6 +3,12 @@ $error = false;
 
 $nome = $endereco = $telefone = $email = $genero = $idade = $cpf = '';
 
+function input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    return $data;
+}
+
 if(isset($_POST['cadastrar'])) {
     $nome = input($_POST["nome"]);
     $endereco = input($_POST["endereco"]);
@@ -11,15 +17,6 @@ if(isset($_POST['cadastrar'])) {
     $genero = input($_POST["genero"]);
     $idade = input($_POST["idade"]);
     $cpf = input($_POST["cpf"]);
-     
- }
-
- function input($data) {
-     $data = trim($data);
-     $data = stripslashes($data);
-     // $data = htmlspecialchars($data);
-     return $data;
- }
     
     $xml=simplexml_load_file("users/pacientes.xml") or die ("Erro ao abrir o arquivo de pacientes!");
 
@@ -38,15 +35,17 @@ if(isset($_POST['cadastrar'])) {
     $node->addChild("idade", $idade);
     $node->addChild("cpf", $cpf);
     
-    $save = simplexml_import_dom($xml);
-    $save->saveXML ('users/pacientes.xml');
+    $save = simplexml_import_dom($xml);    
+    $save->saveXML ('users/pacientes.xml') or die ('Erro ao salvar');
     }
+}
+
     
     // echo $xml->asXML();
 
-    foreach ($xml->children()  as $p){
-        echo "<br>Nome do paciente: " . $p->nome;
-    }
+    // foreach ($xml->children()  as $p){
+    //     echo "<br>Nome do paciente: " . $p->nome;
+    // }
 
 ?>
 

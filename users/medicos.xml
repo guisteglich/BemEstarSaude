@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <medicos>
     <!-- <medico>
         <nome>Guilherme</nome>
@@ -6,4 +7,4 @@
         <especialidade>Cardiologia</especialidade>
         <crm>3123</crm>
     </medico> -->
-</medicos>
+<medico><nome>Mateus</nome><endereco>123</endereco><telefone>53991675317</telefone><email>mateusmarquesdc@gmail.com</email><especialidade>Medico</especialidade><crm>123213</crm></medico></medicos>

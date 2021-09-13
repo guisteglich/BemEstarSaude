@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <pacientes>
     <!-- <paciente>
         <nome>Guilherme Steglich</nome>
@@ -8,4 +9,4 @@
         <idade> 21 </idade>
         <cpf> 123456789 </cpf>
     </paciente> -->
-</pacientes>
+<paciente><nome>gui</nome><endereco>123</endereco><telefone>123213123</telefone><email>marketing@anota.ai</email><genero>Masculino</genero><idade>12</idade><cpf>123123213213</cpf></paciente></pacientes>
