@@ -2,17 +2,17 @@
 $error = false;
 $sucesso = false;
 
-if(isset($_POST['AltMed'])) {
+if(isset($_POST['AltCadLab'])) {
     $contador = 0;
     $posicao = 0;
     $cnpj = $_POST['cnpj'];
-    $alterar = $_POST['trocado'];
-    $valor_novo = $_POST['valor_novo'];
+    $alterar = $_POST['novoValor'];
+    $valor_novo = $_POST['valorNovo'];
     
     if ($_SESSION['cnpj'] == $cnpj) {
-        $xml=simplexml_load_file("users/laboratiorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
-        foreach($xml->children() as $sk) {
-            if ($sk->cnpj == $cnpj) {
+        $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
+        foreach($xml->children() as $ch) {
+            if ($ch->cnpj == $cnpj) {
                 // echo ("Achei a posicao no xml!"); //
                 $posicao = $contador;
             }
@@ -25,6 +25,7 @@ if(isset($_POST['AltMed'])) {
     }else{
         $error = true;
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,33 +40,37 @@ if(isset($_POST['AltMed'])) {
     <body>
         <h1>Alterar cadastro de laboratórios </h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label> Digite o CNPJ do laboratório: </label>
+        <input type="text" name="cnpj" id= "cnpj">
+        <br>
+        <p> Marque a opção que deseja atualizar </p>
         <label>
-            Nome <input type="radio" name="nome" value="troca">
+            Nome <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Endereço <input type="radio" name="endereco" value="troca">
+            Endereço <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Telefone <input type="radio" name="telefone" value="troca">
+            Telefone <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            E-mail <input type="radio" name="email" value="troca">
+            E-mail <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Tipo de Exames <input type="radio" name="tipoexames" value="troca">
+            Tipo de Exames <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
             CNPJ <input type="radio" name="cnpj" value="troca">
         </label>
         <br>
-        <p>Digite o novo valor da caixa marcada acima <input type="text" name="novo" size="20" /></p> 
+        <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 
         <br>
-        <input type="submit" name="AltMed" value="Alterar Dados">
+        <input type="submit" name="AltCadLab" value="Alterar Dados">
     </form>
     </body>
 </html>

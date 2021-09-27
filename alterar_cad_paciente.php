@@ -1,3 +1,34 @@
+<?php
+
+$error = false;
+$sucesso = false;
+if(isset($_POST['AltCadPac'])) {
+    $contador = 0;
+    $posicao = 0;
+    $cpf = $_POST['cpf$cpf'];
+    $alterar = $_POST['novoValor'];
+    $valor_novo = $_POST['valorNovo'];
+
+    if ($_SESSION['cpf'] == $cpf) {
+        $xml=simplexml_load_file("users/pacientes.xml") or die ("Erro ao abrir arquivo de pacientes!");
+        foreach($xml->children() as $ch) {
+            if ($ch->cpf == $cpf) {
+                // echo ("Achei a posicao no xml!"); //
+                $posicao = $contador;
+            }
+            $contador= $contador+1;
+        }
+        $xml->medico[$posicao]->$alterar = $valor_novo;
+        $s = simplexml_import_dom($xml);
+        $s->saveXML ('users/pacientes.xml');
+        $sucesso = true;
+    }else{
+        $error = true;
+    }
+    
+}
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -10,37 +41,41 @@
     <body>
         <h1>Alterar cadastro de pacientes </h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label> Digite o CPF do paciente: </label>
+        <input type="text" name="cpf" id= "cpf">
+        <br>
+        <p> Marque a opção que deseja atualizar </p>
         <label>
-            Nome <input type="radio" name="nome" value="troca">
+            Nome <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Endereço <input type="radio" name="endereco" value="troca">
+            Endereço <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Telefone <input type="radio" name="telefone" value="troca">
+            Telefone <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            E-mail <input type="radio" name="email" value="troca">
+            E-mail <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Gênero <input type="radio" name="genero" value="troca">
+            Gênero <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
-            Idade <input type="radio" name="idade" value="troca">
+            Idade <input type="radio" name="novoValor" value="troca">
         </label>
 
         <label>
             CPF <input type="radio" name="cpf" value="troca">
         </label>
         <br>
-        <p>Digite o novo valor da caixa marcada acima <input type="text" name="novo" size="20" /></p> 
+        <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 
         <br>
-        <input type="submit" name="AltMed" value="Alterar Dados">
+        <input type="submit" name="AltCadPac" value="Alterar Dados">
     </form>
     </body>
 </html>

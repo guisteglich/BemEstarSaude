@@ -1,3 +1,34 @@
+<?php
+
+$error = false;
+$sucesso = false;
+if(isset($_POST['AltCadMed'])) {
+    $contador = 0;
+    $posicao = 0;
+    $crm = $_POST['crm'];
+    $alterar = $_POST['novoValor'];
+    $valor_novo = $_POST['valorNovo'];
+
+    if ($_SESSION['crm'] == $crm) {
+        $xml=simplexml_load_file("users/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
+        foreach($xml->children() as $ch) {
+            if ($ch->crm == $crm) {
+                // echo ("Achei a posicao no xml!"); //
+                $posicao = $contador;
+            }
+            $contador= $contador+1;
+        }
+        $xml->medico[$posicao]->$alterar = $valor_novo;
+        $s = simplexml_import_dom($xml);
+        $s->saveXML ('users/medicos.xml');
+        $sucesso = true;
+    }else{
+        $error = true;
+    }
+    
+}
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -10,33 +41,34 @@
     <body>
         <h1>Alterar cadastro de médicos </h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <label>
-            Nome <input type="radio" name="nome" value="troca">
-        </label>
-
-        <label>
-            Endereço <input type="radio" name="endereco" value="troca">
-        </label>
-
-        <label>
-            Telefone <input type="radio" name="telefone" value="troca">
-        </label>
-
-        <label>
-            E-mail <input type="radio" name="email" value="troca">
-        </label>
-
-        <label>
-            Especialidade <input type="radio" name="especialidade" value="troca">
-        </label>
-
-        <label>
-            CRM <input type="radio" name="crm" value="troca">
-        </label>
+        <label> Digite o seu CRM: </label>
+        <input type="text" name="crm" id= "crm">
         <br>
-        <p>Digite o novo valor da caixa marcada acima <input type="text" name="novo" size="20" /></p> 
+        <p> Marque a opção que deseja atualizar </p>
+        <label>
+            Nome <input type="radio" name="novoValor" value="troca">
+        </label>
+
+        <label>
+            Endereço <input type="radio" name="novoValor" value="troca">
+        </label>
+
+        <label>
+            Telefone <input type="radio" name="novoValor" value="troca">
+        </label>
+
+        <label>
+            E-mail <input type="radio" name="novoValor" value="troca">
+        </label>
+
+        <label>
+            Especialidade <input type="radio" name="novoValor" value="troca">
+        </label>
+               
         <br>
-        <input type="submit" name="AltMed" value="Alterar Dados">
+        <p>Digite o novo valor da caixa marcada acima <input type="text" name="novoValor" size="20" /></p> 
+        <br>
+                <input type="submit" name="AltCadMed" value="Alterar Dados">
     </form>
     </body>
 </html>
