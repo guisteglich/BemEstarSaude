@@ -11,7 +11,7 @@ if(isset($_POST['AltCadMed'])) {
     $alterar = $_POST['novoValor'];
     $valor_novo = $_POST['valorNovo'];
 
-    if ($_SESSION['crm'] == $crm) {
+    // if ($_SESSION['crm'] == $crm) {
         $xml=simplexml_load_file("users/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
         foreach($xml->children() as $ch) {
             if ($ch->crm == $crm) {
@@ -24,9 +24,10 @@ if(isset($_POST['AltCadMed'])) {
         $s = simplexml_import_dom($xml);
         $s->saveXML ('users/medicos.xml');
         $sucesso = true;
-    }else{
-        $error = true;
-    }
+    // }
+    // else{
+        // $error = true;
+    // }
     
 }
 ?>
@@ -48,25 +49,24 @@ if(isset($_POST['AltCadMed'])) {
         <br>
         <p> Marque a opção que deseja atualizar </p>
         <label>
-            Nome <input type="radio" name="novoValor" value="troca">
+            Nome <input type="radio" name="novoValor" value="nome">
         </label>
 
         <label>
-            Endereço <input type="radio" name="novoValor" value="troca">
+            Endereço <input type="radio" name="novoValor" value="endereco">
         </label>
 
         <label>
-            Telefone <input type="radio" name="novoValor" value="troca">
+            Telefone <input type="radio" name="novoValor" value="telefone">
         </label>
 
         <label>
-            E-mail <input type="radio" name="novoValor" value="troca">
+            Especialidade <input type="radio" name="novoValor" value="especialidade">
         </label>
 
         <label>
-            Especialidade <input type="radio" name="novoValor" value="troca">
-        </label>
-               
+            CRM <input type="radio" name="novoValor" value="crm">
+        </label>   
         <br>
         <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 
         <br>

@@ -14,7 +14,7 @@ if(isset($_POST['AltCadLab'])) {
     // Ta acusando erro nesse $_SESSION
     // Warning: Undefined variable $_SESSION in C:\xampp\htdocs\BemEstarSaude\alterar_cad_lab.php on line 12
     // Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\BemEstarSaude\alterar_cad_lab.php on line 12    
-    if ($_SESSION['cnpj'] == $cnpj) { 
+    // if ($_SESSION['cnpj'] == $cnpj) { 
         $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
         foreach($xml->children() as $ch) {
             if ($ch->cnpj == $cnpj) {
@@ -23,13 +23,13 @@ if(isset($_POST['AltCadLab'])) {
             }
             $contador= $contador+1;
         }
-        $xml->lab[$posicao]->$alterar = $valor_novo;
+        $xml->laboratorio[$posicao]->$alterar = $valor_novo;
         $s = simplexml_import_dom($xml);
         $s->saveXML ('users/laboratorios.xml');
         $sucesso = true;
-    }else{
-        $error = true;
-    }
+    // }else{
+    //     $error = true;
+    // }
 }
 ?>
 
@@ -50,27 +50,26 @@ if(isset($_POST['AltCadLab'])) {
         <br>
         <p> Marque a opção que deseja atualizar </p>
         <label>
-            Nome <input type="radio" name="novoValor" value="troca">
+            Nome <input type="radio" name="novoValor" value="nome">
         </label>
 
         <label>
-            Endereço <input type="radio" name="novoValor" value="troca">
+            Endereço <input type="radio" name="novoValor" value="endereco">
         </label>
 
         <label>
-            Telefone <input type="radio" name="novoValor" value="troca">
+            Telefone <input type="radio" name="novoValor" value="telefone">
         </label>
 
         <label>
-            E-mail <input type="radio" name="novoValor" value="troca">
+            Tipo de exame <input type="radio" name="novoValor" value="tiposexame">
+        </label>
+        <label>
+            E-mail <input type="radio" name="novoValor" value="email">
         </label>
 
         <label>
-            Tipo de Exames <input type="radio" name="novoValor" value="troca">
-        </label>
-
-        <label>
-            CNPJ <input type="radio" name="novoValor" value="troca">
+            cnpj <input type="radio" name="novoValor" value="cnpj">
         </label>
         <br>
         <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 

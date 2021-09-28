@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <pacientes>
-    <!-- <paciente>
-        <nome>Guilherme Steglich</nome>
-        <endereco>Alvício Scheffel </endereco>
-        <telefone> 5199786199 </telefone>
-        <email> guilhermesi@furg.br </email>
-        <genero> M </genero>
-        <idade> 21 </idade>
-        <cpf> 123456789 </cpf>
-    </paciente> -->
-<paciente><nome>gui</nome><endereco>123</endereco><telefone>123213123</telefone><email>marketing@anota.ai</email><genero>Masculino</genero><idade>12</idade><cpf>123123213213</cpf></paciente><medico><troca>456</troca></medico></pacientes>
+    <paciente>
+        <nome>gui</nome>
+        <endereco>123</endereco>
+        <telefone>123213123</telefone>
+        <email>gui@guizim.com</email>
+        <genero>Masculino</genero>
+        <idade>12</idade>
+        <cpf>123123213213</cpf>
+    </paciente>
+</pacientes>

@@ -14,7 +14,7 @@ if(isset($_POST['AltCadPac'])) {
     // Warning: Undefined variable $_SESSION in C:\xampp\htdocs\BemEstarSaude\alterar_cad_paciente.php on line 12
     // Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\BemEstarSaude\alterar_cad_paciente.php on line 12
 
-    if ($_SESSION['cpf'] == $cpf) {
+    // if ($_SESSION['cpf'] == $cpf) {
         $xml=simplexml_load_file("users/pacientes.xml") or die ("Erro ao abrir arquivo de pacientes!");
         foreach($xml->children() as $ch) {
             if ($ch->cpf == $cpf) {
@@ -23,13 +23,13 @@ if(isset($_POST['AltCadPac'])) {
             }
             $contador= $contador+1;
         }
-        $xml->medico[$posicao]->$alterar = $valor_novo;
+        $xml->paciente[$posicao]->$alterar = $valor_novo;
         $s = simplexml_import_dom($xml);
         $s->saveXML ('users/pacientes.xml');
         $sucesso = true;
-    }else{
-        $error = true;
-    } 
+    // }else{
+        // $error = true;
+    // } 
 }
 ?>
 
@@ -50,31 +50,29 @@ if(isset($_POST['AltCadPac'])) {
         <br>
         <p> Marque a opção que deseja atualizar </p>
         <label>
-            Nome <input type="radio" name="novoValor" value="troca">
+            Nome <input type="radio" name="novoValor" value="nome">
         </label>
 
         <label>
-            Endereço <input type="radio" name="novoValor" value="troca">
+            Endereço <input type="radio" name="novoValor" value="endereco">
+        </label>
+        <label>
+            Telefone <input type="radio" name="novoValor" value="telefone">
         </label>
 
         <label>
-            Telefone <input type="radio" name="novoValor" value="troca">
+            E-mail <input type="radio" name="novoValor" value="email">
         </label>
 
         <label>
-            E-mail <input type="radio" name="novoValor" value="troca">
+            Gênero <input type="radio" name="novoValor" value="genero">
         </label>
 
         <label>
-            Gênero <input type="radio" name="novoValor" value="troca">
+            Idade <input type="radio" name="novoValor" value="idade">
         </label>
-
         <label>
-            Idade <input type="radio" name="novoValor" value="troca">
-        </label>
-
-        <label>
-            CPF <input type="radio" name="cpf" value="troca">
+            CPF <input type="radio" name="cpf" value="cpf">
         </label>
         <br>
         <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 
