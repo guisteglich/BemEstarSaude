@@ -8,8 +8,11 @@ if(isset($_POST['AltCadLab'])) {
     $cnpj = $_POST['cnpj'];
     $alterar = $_POST['novoValor'];
     $valor_novo = $_POST['valorNovo'];
-    
-    if ($_SESSION['cnpj'] == $cnpj) {
+
+    // Ta acusando erro nesse $_SESSION
+    // Warning: Undefined variable $_SESSION in C:\xampp\htdocs\BemEstarSaude\alterar_cad_lab.php on line 12
+    // Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\BemEstarSaude\alterar_cad_lab.php on line 12    
+    if ($_SESSION['cnpj'] == $cnpj) { 
         $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
         foreach($xml->children() as $ch) {
             if ($ch->cnpj == $cnpj) {

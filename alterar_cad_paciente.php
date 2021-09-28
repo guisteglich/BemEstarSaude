@@ -5,9 +5,13 @@ $sucesso = false;
 if(isset($_POST['AltCadPac'])) {
     $contador = 0;
     $posicao = 0;
-    $cpf = $_POST['cpf$cpf'];
+    $cpf = $_POST['cpf'];
     $alterar = $_POST['novoValor'];
     $valor_novo = $_POST['valorNovo'];
+
+    // Deu erro no $_SESSION
+    // Warning: Undefined variable $_SESSION in C:\xampp\htdocs\BemEstarSaude\alterar_cad_paciente.php on line 12
+    // Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\BemEstarSaude\alterar_cad_paciente.php on line 12
 
     if ($_SESSION['cpf'] == $cpf) {
         $xml=simplexml_load_file("users/pacientes.xml") or die ("Erro ao abrir arquivo de pacientes!");
@@ -24,8 +28,7 @@ if(isset($_POST['AltCadPac'])) {
         $sucesso = true;
     }else{
         $error = true;
-    }
-    
+    } 
 }
 ?>
 

@@ -68,7 +68,7 @@ if(isset($_POST['AltCadMed'])) {
         <br>
         <p>Digite o novo valor da caixa marcada acima <input type="text" name="novoValor" size="20" /></p> 
         <br>
-                <input type="submit" name="AltCadMed" value="Alterar Dados">
+                <input type="submit" name="valorNovo" value="Alterar Dados">
     </form>
     </body>
 </html>
