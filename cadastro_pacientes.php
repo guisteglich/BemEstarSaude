@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $error = false;
 
 $nome = $endereco = $telefone = $email = $genero = $idade = $cpf = '';

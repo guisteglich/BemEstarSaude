@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $error = false;
 
 if(isset($_POST['CadMed'])) {
@@ -18,6 +20,7 @@ if(isset($_POST['CadMed'])) {
     $email = input($_POST['email']);
     $especialidade = input($_POST['especialidade']);
     $crm = input($_POST['crm']);
+    $senha = input($_POST['password']);
     
     $xml = simplexml_load_file("users/medicos.xml") or die ("Erro ao carregar arquivo de médicos!");
 
@@ -37,6 +40,7 @@ if(isset($_POST['CadMed'])) {
     $node->addChild("email", $email);
     $node->addChild("especialidade", $especialidade);
     $node->addChild("crm", $crm);
+    $node->addChild("password", $senha);
 
     $s = simplexml_import_dom($xml);
     $s->saveXML ('users/medicos.xml') or die ('Erro ao salvar');
@@ -79,6 +83,9 @@ if(isset($_POST['CadMed'])) {
 
                 <label>CRM:</label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" name="crm" id="crm">
+                
+                <label>Senha de acesso: </label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="password" name="password">
                 <div class='flex justify-center'>
                     <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar" name="CadLab">
                 </div>

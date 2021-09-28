@@ -1,14 +1,16 @@
 <?php
+session_start();
+
 $error = false;
 
 if(isset($_POST['CadLab'])) {
     $cnpj = $_POST['cnpj'];
-    // $senha = $_POST['senha'];
     $nome = $_POST['nome'];
     $end = $_POST['endereco'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $tipoexame = $_POST['tipoexame'];
+    $senha = input($_POST['password']);
     
     $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo!");
     foreach($xml->children() as $lab) {
@@ -18,14 +20,14 @@ if(isset($_POST['CadLab'])) {
     }
 
 
-    $add = $xml->addChild("lab"); 
+    $add = $xml->addChild("laboratorio"); 
     $add -> addChild("cnpj", $cnpj);
     $add -> addChild("nome", $nome);
-    // $add -> addChild("senha", $senha);
     $add -> addChild("end", $end);
     $add -> addChild("telefone", $telefone);
     $add -> addChild("email", $email);
     $add -> addChild("tipoexame", $tipoexame);
+    $add->addChild("password", $senha);
 
     $s = simplexml_import_dom($xml);
     $s->saveXML ('users/laboratorios.xml') or die ('Erro ao salvar');
@@ -65,6 +67,9 @@ if(isset($_POST['CadLab'])) {
 
         <label>CNPJ: </label>
         <input type="number" id="cnpj" name="cnpj">
+
+        <label>Senha de acesso: </label>
+        <input type="text" id="password" name="password">
         <br>
         <input type="submit" name="CadLab" value="Cadastrar Laboratório">
     </form>

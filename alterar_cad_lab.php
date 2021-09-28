@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $error = false;
 $sucesso = false;
 
@@ -68,7 +70,7 @@ if(isset($_POST['AltCadLab'])) {
         </label>
 
         <label>
-            CNPJ <input type="radio" name="cnpj" value="troca">
+            CNPJ <input type="radio" name="novoValor" value="troca">
         </label>
         <br>
         <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 

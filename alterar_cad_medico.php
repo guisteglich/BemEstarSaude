@@ -1,7 +1,9 @@
 <?php
+session_start();
 
 $error = false;
 $sucesso = false;
+
 if(isset($_POST['AltCadMed'])) {
     $contador = 0;
     $posicao = 0;
@@ -66,9 +68,9 @@ if(isset($_POST['AltCadMed'])) {
         </label>
                
         <br>
-        <p>Digite o novo valor da caixa marcada acima <input type="text" name="novoValor" size="20" /></p> 
+        <p>Digite o novo valor da caixa marcada acima <input type="text" name="valorNovo" size="20" /></p> 
         <br>
-                <input type="submit" name="valorNovo" value="Alterar Dados">
+                <input type="submit" name="AltCadMed" value="Alterar Dados">
     </form>
     </body>
 </html>
