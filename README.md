@@ -2,15 +2,19 @@
 ## :rocket: Tecnologias utilizadas:
 - PHP;
 - HTML;
+- CSS;
+
+## :bulb: Frameworks utilizados:
+- Tailwind CSS;
 
 ---
 
 ## :heavy_check_mark: Tarefas realizadas no back:
-> 1/9
+> 13/16
 - [X] Cadastro médicos
 - [X] Cadastro labaratórios
 - [X] Cadastro pacientes
-- [] Cadastro Exame
+- [] Cadastro Exame - **precisa testar**
 - [X] Cadastro Consulta
 - [X] Buscar paciente
 - [X] Alterar cadastro médicos
@@ -25,7 +29,7 @@
 - [X] Login Paciente
   
 ## :heavy_check_mark: Tarefas realizadas no front:
-> 0/0
+> 0/13
 - [X] Tela Login Médico
 - [X] Login Paciente
 - [X] Login laboratório
@@ -41,5 +45,5 @@
 - [] Cadastrar consulta
 
 ## :heavy_check_mark: Andrews:
-> 0/0
+> 0/1
 - [] Mascara

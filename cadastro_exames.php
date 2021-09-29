@@ -5,7 +5,7 @@ $error = false;
 $confirmar = false;
 
 if(isset($_POST['CadEx'])) {
-    // $cnpj = $_SESSION['cnpj'];
+    $cnpj = $_SESSION['cnpj'];
     $cpf = $_POST['cpf'];
     $data = $_POST['data'];
     $tipoexame = $_POST['tipoexame'];
@@ -13,10 +13,10 @@ if(isset($_POST['CadEx'])) {
    
     $xml=simplexml_load_file("users/exames.xml") or die ("Erro ao abrir arquivo de exames!");
 
-    foreach($xml->children() as $ex) {
-        if ($ex->cnpj == $cnpj){
-            if ($ex->cpf == $cpf) {
-                if ($ex->data == $data) {
+    foreach($xml->children() as $ch) {
+        if ($ch->cnpj == $cnpj){
+            if ($ch->cpf == $cpf) {
+                if ($ch->data == $data) {
                     $error = true;    
                 }
             }
@@ -26,13 +26,14 @@ if(isset($_POST['CadEx'])) {
 if ($error == false){
     $add = $xml->addChild("exame"); 
     $add -> addChild("cpf", $cpf);
-    // $add -> addChild("cnpj", $cnpj);
+    $add -> addChild("cnpj", $cnpj);
     $add -> addChild("data", $data);
     $add -> addChild("tipoexame", $tipoexame);
     $add -> addChild("resultado", $resultado);
 
     $s = simplexml_import_dom($xml);
-    $s->saveXML ('users/exames.xml') or die ('Erro ao salvar');
+    $s->saveXML ('users/exames.xml') or die ('Erro ao salvar exame');
+
     $confirmar = true;
     
     }
@@ -51,7 +52,7 @@ if ($error == false){
     <body>
         <h1>Cadastro de exame </h1>
         <form name="CadCon" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <label>CPF do paciente:</label>
+        <label>Insira o CPF do paciente:</label>
         <input type="number" id="cpf" name="cpf">
 
         <label>Data da consulta:</label>
@@ -66,7 +67,7 @@ if ($error == false){
         <input type="submit" name="CadEx" value="Cadastrar Exame">
         <?php
             if ($error) {
-                echo '<p> Exame com esse paciente ja cadastrada neste dia </p>' ; 
+                echo '<p> Exame com esse paciente já está cadastrado para esse dia </p>' ; 
             }
             else {
                 if ($confirmar == true) {

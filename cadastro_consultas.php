@@ -56,7 +56,7 @@ if(isset($_POST['CadCon'])) {
         <input type="text" name="cpf" id="cpf">
         <br>
         <label>Data da consulta: </label>
-        <input type="text" name="data" id="data">
+        <input type="date" name="data" id="data">
         <br>
         <label>Receita: </label>
         <input type="text" name="receita" id="receita">
