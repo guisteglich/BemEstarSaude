@@ -23,6 +23,7 @@
 - [] Alterar consultas
 - [] Alterar exames
 - [X] Buscar Consulta Paciente
+- [] Buscar exames paciente
 - [X] Login
 - [X] Login Labotatório
 - [X] Login Médico
