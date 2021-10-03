@@ -79,8 +79,18 @@ function is_empty(field){
 
 function is_cpf(){
     let cpf = document.getElementById('cpf')
-    if(field.value.length != 11){
-        alert(`O campo ${field.name} é invalido!`)
+    if(cpf.value.length != 11){
+        alert(`O CPF é invalido!`)
+        return false
+    }else{
+        return true
+    }
+}
+
+function is_cnpj(){
+    let cnpj = document.getElementById('cnpj')
+    if(cnpj.value.length != 14){
+        alert(`O campo CNPJ é invalido!`)
         return false
     }else{
         return true

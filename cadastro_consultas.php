@@ -48,24 +48,25 @@ if(isset($_POST['CadCon'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cadastro de Consultas - Bem Estar Saúde</title>
+        <script type="text/javascript" src="./public/js/validation.js"></script>
     </head>
     <body>
         <h1>Cadastro de consulta </h1>
         <form name="CadCon" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label>Insira o CPF do paciente: </label>
-        <input type="text" name="cpf" id="cpf">
+        <input type="text" name="cpf" id="cpf" onfocusout="is_cpf()">
         <br>
         <label>Data da consulta: </label>
-        <input type="date" name="data" id="data">
+        <input type="date" name="data" id="data" onfocusout="is_empty(this)">
         <br>
         <label>Receita: </label>
-        <input type="text" name="receita" id="receita">
+        <input type="text" name="receita" id="receita" onfocusout="is_empty(this)">
         <br>
         <label>Observações: </label>
         <input type="text" name="obs" id="obs">
 
         <br>
-        <input type="submit" name="CadCon" value="Confirmar Consulta">
+        <input type="submit" name="CadCon" value="Confirmar Consulta" onclick="send_form()">
 
         <?php
             if ($error) {

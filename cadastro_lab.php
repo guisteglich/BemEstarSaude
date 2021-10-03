@@ -10,7 +10,7 @@ if(isset($_POST['CadLab'])) {
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $tipoexame = $_POST['tipoexame'];
-    $senha = input($_POST['password']);
+    $senha = $_POST['password'];
     
     $xml=simplexml_load_file("users/laboratorios.xml") or die ("Erro ao abrir arquivo!");
     foreach($xml->children() as $lab) {
@@ -46,32 +46,37 @@ if(isset($_POST['CadLab'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cadastro de laboratórios - Bem Estar Saúde</title>
+        <script type="text/javascript" src="./public/js/validation.js"></script>
     </head>
     <body>
         <h1>Cadastro de laboratórios </h1>
         <form name="CadLab" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label>Nome: </label>
-        <input type="text" id="nome" name="nome">
+        <input type="text" id="nome" name="nome" onfocusout="is_valid_name()">
+        <span id="name_error"></span>
 
         <label>Endereço: </label>
-        <input type="text" id="endereco" name="endereco">
+        <input type="text" id="endereco" name="endereco" onfocusout="is_valid_address()">
+        <span id="address_error"></span>
 
         <label>Telefone: </label>
-        <input type="tel" id="telefone" name="telefone">
+        <input type="tel" id="telefone" name="telefone" maxlength="15" onfocusout="is_empty(this)">
+        <span id="phone_error"></span>
 
         <label>E-mail: </label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" onfocusout="is_valid_email()">
+        <span id="email_error"></span>
 
         <label>Tipo de exame: </label>
-        <input type="text" id="tipoexame" name="tipoexame">
+        <input type="text" id="tipoexame" name="tipoexame" onfocusout="is_empty(this)">
 
         <label>CNPJ: </label>
-        <input type="number" id="cnpj" name="cnpj">
+        <input type="number" id="cnpj" name="cnpj" onfocusout="is_cnpj()">
 
         <label>Senha de acesso: </label>
-        <input type="text" id="password" name="password">
+        <input type="text" id="password" name="password" onfocusout="is_empty(this)">
         <br>
-        <input type="submit" name="CadLab" value="Cadastrar Laboratório">
+        <input type="submit" name="CadLab" value="Cadastrar Laboratório" onclick="send_form()">
     </form>
     <?php
         if ($error  == true){

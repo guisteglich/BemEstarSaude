@@ -14,4 +14,4 @@
         <receita>alguma2</receita>
         <observacoes>none</observacoes>
    </consulta>
-<consulta><cpf>234234234234</cpf><crm>3123</crm><data>121212</data><receita>asdsadsadasdaserqwqweqwe</receita><obs>sdsfdsfdsffaddadadaadabxfc</obs></consulta></consultas>
+<consulta><cpf>234234234234</cpf><crm>3123</crm><data>121212</data><receita>asdsadsadasdaserqwqweqwe</receita><obs>sdsfdsfdsffaddadadaadabxfc</obs></consulta><consulta><cpf>016.325.370-60</cpf><crm/><data>2000-05-25</data><receita>dadad</receita><obs/></consulta><consulta><cpf>016.325.370-60</cpf><crm/><data>2000-05-25</data><receita>dadad</receita><obs/></consulta><consulta><cpf>01632537060</cpf><crm/><data/><receita/><obs/></consulta></consultas>

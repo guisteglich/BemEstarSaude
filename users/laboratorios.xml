@@ -9,4 +9,4 @@
         <cnpj>1457879</cnpj>
         <password>lab3456</password>
     </laboratorio>
-</laboratorios>
+<laboratorio><cnpj>01632537060</cnpj><nome>ANDREWS PEREIRA DUTRA</nome><end>Rua Cento e Oito</end><telefone>(51) 99192-0020</telefone><email>andrewsdutra25@gmail.com</email><tipoexame>TESTE</tipoexame><password>dadadad</password></laboratorio><laboratorio><cnpj>01632537060</cnpj><nome>ANDREWS PEREIRA DUTRA</nome><end>Rua Cento e Oito</end><telefone>(51) 99192-0020</telefone><email>andrewsdutra25@gmail.com</email><tipoexame>TESTE</tipoexame><password>dadadad</password></laboratorio></laboratorios>

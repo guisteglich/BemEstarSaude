@@ -48,23 +48,24 @@ if ($error == false){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cadastro de Exames - Bem Estar Saúde</title>
+        <script type="text/javascript" src="./public/js/validation.js"></script>
     </head>
     <body>
         <h1>Cadastro de exame </h1>
         <form name="CadCon" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label>Insira o CPF do paciente:</label>
-        <input type="number" id="cpf" name="cpf">
+        <input type="text" id="cpf" name="cpf" onfocusout="is_cpf()">
 
         <label>Data da consulta:</label>
-        <input type="date" id="data" name="data">
+        <input type="date" id="data" name="data" onfocusout="is_empty(this)">
 
         <label>Tipo de exame:</label>
-        <input type="text" id="tipoexame" name="tipoexame">
+        <input type="text" id="tipoexame" name="tipoexame" onfocusout="is_empty(this)">
 
         <label>Resultado:</label>
-        <input type="text" id="resultado" name="resultado">
+        <input type="text" id="resultado" name="resultado" onfocusout="is_empty(this)">
         <br>
-        <input type="submit" name="CadEx" value="Cadastrar Exame">
+        <input type="submit" name="CadEx" value="Cadastrar Exame" onclick="send_form()">
         <?php
             if ($error) {
                 echo '<p> Exame com esse paciente já está cadastrado para esse dia </p>' ; 
