@@ -9,4 +9,4 @@
         <idade>12</idade>
         <cpf>123123213213</cpf>
     </paciente>
-</pacientes>
+<paciente><nome>sdsdsdsd</nome><endereco>dsdsd</endereco><telefone>(51) 99192-0020</telefone><email>andrewsdutra25@gmail.com</email><genero>dad</genero><idade>2121</idade><cpf>23232323233</cpf></paciente><paciente><nome/><endereco/><telefone/><email/><genero/><idade/><cpf>01632547060</cpf></paciente><paciente><nome/><endereco/><telefone/><email/><genero/><idade/><cpf/></paciente><paciente><nome>ANDREWS PEREIRA DUTRA</nome><endereco>Rua Cento e Oito</endereco><telefone>(51) 99192-0020</telefone><email>andrewsdutra25@gmail.com</email><genero>dad</genero><idade>33</idade><cpf>016.325.370-60</cpf></paciente></pacientes>
