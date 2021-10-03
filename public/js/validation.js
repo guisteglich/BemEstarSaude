@@ -78,8 +78,9 @@ function is_empty(field){
 }
 
 function is_cpf(){
-    let cpf = document.getElementById('cpf')
-    if(cpf.value.length != 11){
+    let cpf = document.getElementById('cpf').value
+    let cpf_desformatado = cpf.replace(".", "").replace(".", "").replace("-", "")
+    if(cpf_desformatado.length != 11){
         alert(`O CPF é invalido!`)
         return false
     }else{
@@ -99,16 +100,18 @@ function is_cnpj(){
 
 function send_form(){
     let form = document.forms[0].elements
-    console.log(form)
+    let empty = false
     document.forms[0].onsubmit = function() {
         let btn = document.getElementsByClassName('btn_submit')
         for (field of form) {
             if (field.value == ''){
+                console.log('veio IF')
                 alert('Você precisa preencher os campos do formulário.')
                 return false
-            }else{
-                return true
             }
+        }
+        if (empty){
+            return true
         }
     };
 }
