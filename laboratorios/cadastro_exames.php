@@ -1,42 +1,48 @@
 <?php
 session_start();
 
-$error = false;
-$confirmar = false;
+if ($_SESSION['cnpj'] != '') {
+    $error = false;
+    $confirmar = false;
 
-if(isset($_POST['CadEx'])) {
-    $cnpj = $_SESSION['cnpj'];
-    $cpf = $_POST['cpf'];
-    $data = $_POST['data'];
-    $tipoexame = $_POST['tipoexame'];
-    $resultado = $_POST['resultado'];
-   
-    $xml=simplexml_load_file("../db/exames.xml") or die ("Erro ao abrir arquivo de exames!");
+    if(isset($_POST['CadEx'])) {
+        $cnpj = $_SESSION['cnpj'];
+        $cpf = $_POST['cpf'];
+        $nome = $_POST['nome'];
+        $data = $_POST['data'];
+        $tipoexame = $_POST['tipoexame'];
+        $resultado = $_POST['resultado'];
+    
+        $xml=simplexml_load_file("../db/exames.xml") or die ("Erro ao abrir arquivo de exames!");
 
-    foreach($xml->children() as $ch) {
-        if ($ch->cnpj == $cnpj){
-            if ($ch->cpf == $cpf) {
-                if ($ch->data == $data) {
-                    $error = true;    
+        foreach($xml->children() as $ch) {
+            if ($ch->cnpj == $cnpj){
+                if ($ch->cpf == $cpf) {
+                    if ($ch->data == $data) {
+                        $error = true;    
+                    }
                 }
             }
-        }
-}
-
-if ($error == false){
-    $add = $xml->addChild("exame"); 
-    $add -> addChild("cpf", $cpf);
-    $add -> addChild("cnpj", $cnpj);
-    $add -> addChild("data", $data);
-    $add -> addChild("tipoexame", $tipoexame);
-    $add -> addChild("resultado", $resultado);
-
-    $s = simplexml_import_dom($xml);
-    $s->saveXML('../db/exames.xml') or die ('Erro ao salvar exame');
-
-    $confirmar = true;
-    
     }
+
+    if ($error == false){
+        $add = $xml->addChild("exame"); 
+        $add -> addChild("nome", $nome);
+        $add -> addChild("cpf", $cpf);
+        $add -> addChild("cnpj", $cnpj);
+        $add -> addChild("data", $data);
+        $add -> addChild("tipoexame", $tipoexame);
+        $add -> addChild("resultado", $resultado);
+
+        $s = simplexml_import_dom($xml);
+        $s->saveXML('../db/exames.xml') or die ('Erro ao salvar exame');
+        header('Location: index.php');
+        $confirmar = true;
+        
+        }
+    }
+} else {
+    header('Location: login.php');
 }
 ?>
 
@@ -59,7 +65,10 @@ if ($error == false){
         <label>Insira o CPF do paciente:</label>
         <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" id="cpf" name="cpf">
 
-        <label>Data da consulta:</label>
+        <label>Insira o nome do paciente:</label>
+        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="nome" name="nome">
+
+        <label>Data do exame:</label>
         <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" id="data" name="data">
 
         <label>Tipo de exame:</label>

@@ -1,47 +1,45 @@
 <?php
 session_start();
 
-if ($_SESSION['cnpj'] != '') {
+if ($_SESSION['crm'] != '') {
     $error = false;
     $sucesso = false;
-
-    if(isset($_POST['AltCadLab'])) {
+    
+    if(isset($_POST['AltCadMed'])) {
         $contador = 0;
         $posicao = 0;
-        $cnpj = $_SESSION['cnpj'];
+        $crm = $_SESSION['crm'];
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
-
-        if ($_SESSION['cnpj'] == $cnpj) { 
-            $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
-            foreach($xml->children() as $ch) {
-                if ($ch->cnpj == $cnpj) {
-                    $posicao = $contador;
-                }
-                $contador= $contador+1;
+    
+        $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
+        foreach($xml->children() as $ch) {
+            if ($ch->crm == $crm) {
+                
+                $posicao = $contador;
             }
-            $xml->laboratorio[$posicao]->$alterar = $valor_novo;
-            $s = simplexml_import_dom($xml);
-            $s->saveXML ('../db/laboratorios.xml');
-            header('Location: index.php');
-        }else{
-            $error = true;
+            $contador= $contador+1;
         }
-    } 
+        $xml->medico[$posicao]->$alterar = $valor_novo;
+        $s = simplexml_import_dom($xml);
+        $s->saveXML ('../db/medicos.xml');
+        $sucesso = true;
+        header('Location: index.php');
+    }
 } else {
-    header('Location: login.php'); 
+    header('Location: login.php');
 }
 ?>
 
 <!DOCTYPE html>
 
 <html>
-    <head>
+    <head> 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/tailwind.css">
-        <title>Alterar laboratórios - Bem Estar Saúde</title>
+        <title>Alterar médico - Bem Estar Saúde</title>
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -64,19 +62,16 @@ if ($_SESSION['cnpj'] != '') {
                     </label>
 
                     <label class='mr-4'>
-                        Tipo de exame <input type="radio" name="novoValor" value="tiposexame">
+                        Especialidade <input type="radio" name="novoValor" value="especialidade">
                     </label>
                     <label class='mr-4'>
-                        E-mail <input type="radio" name="novoValor" value="email">
-                    </label>
-                    <label class='mr-4'>
-                        cnpj <input type="radio" name="novoValor" value="cnpj">
+                        CRM <input type="radio" name="novoValor" value="crm">
                     </label>
                 </div>
                 <label class='my-4'>Digite o novo valor da caixa marcada acima</label>
                 <input class='border border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="valorNovo" size="20" /></p> 
                 <br>
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="AltCadLab" value="Alterar Dados">
+                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="AltCadMed" value="Alterar Dados">
             </form>
         </div>
     </body>

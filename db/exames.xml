@@ -1,17 +1,4 @@
 <?xml version="1.0"?>
 <exames>
-    <exame>
-        <cpf>21342</cpf>
-        <cnpj>1457879</cnpj>
-        <data>20/04/2010</data>
-        <tipoexame>4</tipoexame>
-        <resultado>Positivo</resultado>
-    </exame>
-    <exame>
-        <cpf>21342</cpf>
-        <cnpj>1223</cnpj>
-        <data>22/04/2010</data>
-        <tipoexame>7</tipoexame>
-        <resultado>Negativo</resultado>
-    </exame>
-<exame><cpf>123123213213</cpf><cnpj>1457879</cnpj><data>2021-10-01</data><tipoexame>&#xF3; positivo</tipoexame><resultado>asdsad</resultado></exame></exames>
+
+<exame><nome>Romeu</nome><cpf>05784598620</cpf><cnpj>098987678</cnpj><data>2021-10-08</data><tipoexame>Dengue</tipoexame><resultado>Aprovado</resultado></exame><exame><nome>Mateus</nome><cpf>203910293</cpf><cnpj>09878762</cnpj><data>1100-12-12</data><tipoexame>Sangue</tipoexame><resultado>Bom</resultado></exame><exame><nome>Joba</nome><cpf>431255312</cpf><cnpj>098987678</cnpj><data>2021-10-15</data><tipoexame>Flacido</tipoexame><resultado>Negativo</resultado></exame><exame><nome>Romeu</nome><cpf>05784598620</cpf><cnpj>098987678</cnpj><data>2021-10-14</data><tipoexame>Sangue</tipoexame><resultado>Positivo</resultado></exame></exames>

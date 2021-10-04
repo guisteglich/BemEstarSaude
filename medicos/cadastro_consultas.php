@@ -7,6 +7,7 @@ if ($_SESSION['crm'] != '') {
 
     if(isset($_POST['CadCon'])) {
         $crm = $_SESSION['crm'];
+        $nome = $_POST['nome'];
         $cpf = $_POST['cpf'];
         $obs = $_POST['obs'];
         $receita = $_POST['receita'];
@@ -26,6 +27,7 @@ if ($_SESSION['crm'] != '') {
 
         if ($error == false){
             $add = $xml->addChild("consulta"); 
+            $add -> addChild("nome", $nome);
             $add -> addChild("cpf", $cpf);
             $add -> addChild("crm", $crm);
             $add -> addChild("data", $data);
@@ -62,6 +64,8 @@ if ($_SESSION['crm'] != '') {
                 </div>
                 <label>Insira o CPF do paciente: </label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="cpf" id="cpf">
+                <label>Insira o nome do paciente: </label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="nome" id="nome">
                 <label>Data da consulta: </label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data" id="data">
                 <label>Receita: </label>

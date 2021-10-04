@@ -46,9 +46,10 @@ if ($_SESSION['login'] == '') {
                 </div>
             </header>
             <div class="mt-3 mb-2 w-full h-full bg-white rounded-md p-6 overflow-auto">
-                <div class="flex flex-row items-center justify-between">
+                <div class="flex flex-row items-center">
                     <!-- Cadastro e busca -->
                     <button class='rounded-md w-24 h-8 bg-green-400 hover:bg-green-500 text-white hover:cursor-pointer'> <a href="../admin/cadastro_medicos.php">Cadastrar</a></button>
+                    <button class='ml-2 w-auto h-8 px-4 bg-yellow-400 hover:bg-yellow-500 rounded-md text-white'><a href='../admin/alterar_cad_medico.php'>Alterar Médico</a></button>
                 </div>
                 <ul class="grid grid-cols-4 py-8 border-b-2">
                     <li>Nome</li>
@@ -65,7 +66,7 @@ if ($_SESSION['login'] == '') {
                         echo "<li>$ch->telefone</li>";
                         echo "<li>$ch->crm</li>";
                         echo "<li>";
-                        echo "<button class='bg-yellow-400 hover:bg-yellow-500 w-20 h-7 rounded-md text-white'><a href='../admin/alterar_cad_medico.php'>Alterar</a></button>";
+                        echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_med.php?crm=$ch->crm'>Ver mais</a></button>";
                         echo "</li>";
                         echo "</ul>";
                     }

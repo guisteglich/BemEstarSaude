@@ -65,7 +65,7 @@ if ($_SESSION['login'] == '') {
                         echo "<li>$ch->email</li>";
                         echo "<li>$ch->cnpj</li>";
                         echo "<li>";
-                        echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/alterar_cad_lab.php'>Ver mais</a></button>";
+                        echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_lab.php?cnpj=$ch->cnpj'>Ver mais</a></button>";
                         echo "</li>";
                         echo "</ul>";
                     }

@@ -55,7 +55,7 @@ if ($_SESSION['login'] != '') {
                     </label>
 
                     <label class='mr-4'>
-                        Endereço <input type="radio" name="novoValor" value="endereco">
+                        Endereço <input type="radio" name="novoValor" value="end">
                     </label>
 
                     <label class='mr-4'>

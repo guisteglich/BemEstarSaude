@@ -37,7 +37,7 @@ if(isset($_POST['cadastrar'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"s content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/tailwind.css">
-    <title>Hospital</title>
+    <title>Login Médico</title>
 </head>
 <body>
     <div class='h-screen flex flex-row-reverse'>
