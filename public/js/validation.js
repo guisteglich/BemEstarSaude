@@ -105,7 +105,6 @@ function send_form(){
         let btn = document.getElementsByClassName('btn_submit')
         for (field of form) {
             if (field.value == ''){
-                console.log('veio IF')
                 alert('Você precisa preencher os campos do formulário.')
                 return false
             }

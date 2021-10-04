@@ -57,6 +57,7 @@ if ($_SESSION['login'] != '') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/tailwind.css">
         <title>Cadastro de Paciente - Bem Estar Saúde</title>
+        <script type="text/javascript" src="../public/js/validation.js"></script>
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -65,27 +66,30 @@ if ($_SESSION['login'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <label>Nome</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="nome" id="nome">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="nome" id="nome" onfocusout="is_valid_name()">
+                <span id="name_error" class="text-xs pb-2 text-red-600"></span>
 
                 <label>Endereço</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="endereco" id="endereco">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="endereco" id="endereco" onfocusout="is_valid_address()">
+                <span id="address_error" class="text-xs pb-2 text-red-600"></span>
 
                 <label>Telefone</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="tel" name="telefone" id="telefone">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="tel" name="telefone" id="telefone" onfocusout="is_empty(this)">
 
                 <label>E-mail</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="email" name="email" id="email">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="email" name="email" id="email" onfocusout="is_valid_email()">
+                <span id="email_error" class="text-xs pb-2 text-red-600"></span>
 
                 <label>Gênero</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="genero" id="genero">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="genero" id="genero" onfocusout="is_empty(this)">
 
                 <label>Idade</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" name="idade" id="idade">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" name="idade" id="idade" onfocusout="is_empty(this)">
                 
                 <label>CPF</label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="cpf" name="cpf">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="cpf" name="cpf" onfocusout="is_cpf()">
                 <div class='flex justify-center'>
-                    <input class='rounded-full w-full h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar Paciente" name="CadPac">
+                    <input class='rounded-full w-full h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar Paciente" name="CadPac" onclick="send_form()">
                 </div>
             </form>
         </div>

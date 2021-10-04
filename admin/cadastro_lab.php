@@ -49,6 +49,7 @@ if ($_SESSION['login'] != '') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/tailwind.css">
         <title>Cadastro de laboratórios - Bem Estar Saúde</title>
+        <script type="text/javascript" src="../public/js/validation.js"></script>
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -57,27 +58,31 @@ if ($_SESSION['login'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <label>Nome: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" id="nome" name="nome">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" id="nome" name="nome" onfocusout="is_valid_name()">
+                <span id="name_error"></span>
 
                 <label>Endereço: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="endereco" name="endereco">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="endereco" name="endereco" onfocusout="is_valid_address()">
+                <span id="address_error"></span>
 
                 <label>Telefone: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="tel" id="telefone" name="telefone">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="tel" id="telefone" name="telefone" maxlength="15" onfocusout="is_empty(this)">
+                <span id="phone_error"></span>
 
                 <label>E-mail: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="email" id="email" name="email">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="email" id="email" name="email" onfocusout="is_valid_email()">
+                <span id="email_error"></span>
 
                 <label>Tipo de exame: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="tipoexame" name="tipoexame">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="tipoexame" name="tipoexame" onfocusout="is_empty(this)">
 
                 <label>CNPJ: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" id="cnpj" name="cnpj">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" id="cnpj" name="cnpj" onfocusout="is_cnpj()">
 
                 <label>Senha de acesso: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="password" name="password">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="password" name="password" onfocusout="is_empty(this)">
                 <br>
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadLab" value="Cadastrar Laboratório">
+                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadLab" value="Cadastrar Laboratório" onclick="send_form()">
             </form>
             <?php
             if ($error  == true){
