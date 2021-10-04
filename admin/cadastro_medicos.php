@@ -55,8 +55,14 @@ if ($_SESSION['login'] != '') {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD:admin/cadastro_medicos.php
         <link rel="stylesheet" href="../public/css/tailwind.css">
         <title>Cadastro de Médicos - Bem Estar Saúde</title>
+=======
+        <link rel="stylesheet" href="./public/css/tailwind.css">
+        <title>Cadastro de médicos - Bem Estar Saúde</title>
+        <script type="text/javascript" src="./public/js/validation.js"></script>
+>>>>>>> 15d1a11977b10bd4163d1999873a8a1c01328353:cadastro_medicos.php
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -64,6 +70,7 @@ if ($_SESSION['login'] != '') {
                 <div class='flex justify-center mb-5'>
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
+<<<<<<< HEAD:admin/cadastro_medicos.php
                 <label>Nome</label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="nome" id="nome">
 
@@ -86,6 +93,33 @@ if ($_SESSION['login'] != '') {
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="password" name="password">
                 <div class='flex justify-center'>
                     <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar" name="CadMed">
+=======
+                <label>Nome:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 ph-1 h-9' type="text" name="nome" id="nome" onfocusout="is_valid_name()">
+                <span id="name_error" class="text-xs pb-2 text-red-600"></span>
+
+                <label>Endereço:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="endereco" id="endereco" onfocusout="is_valid_address()">
+                <span id="address_error" class="text-xs pb-2 text-red-600"></span>
+
+                <label>Telefone:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="tel" name="telefone" id="telefone" maxlength="15" onfocusout="is_empty(this)">
+
+                <label>E-mail:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="email" name="email" id="email" onfocusout="is_valid_email()">
+                <span id="email_error" class="text-xs pb-2 text-red-600"></span>
+
+                <label>Especialidade:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="especialidade" id="especialidade" onfocusout="is_empty(this)">
+
+                <label>CRM:</label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="number" name="crm" id="crm" onfocusout="is_empty(this)">
+                
+                <label>Senha de acesso: </label>
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="password" name="password" onfocusout="is_empty(this)">
+                <div class='flex justify-center'>
+                    <input class='rounded-full w-32 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" value="Cadastrar" name="CadLab" onclick="send_form()">
+>>>>>>> 15d1a11977b10bd4163d1999873a8a1c01328353:cadastro_medicos.php
                 </div>
             </form>
         </div>
