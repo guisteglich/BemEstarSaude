@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<exames>
+    <exame>
+        <cpf>21342</cpf>
+        <cnpj>1457879</cnpj>
+        <data>20/04/2010</data>
+        <tipoexame>4</tipoexame>
+        <resultado>Positivo</resultado>
+    </exame>
+    <exame>
+        <cpf>21342</cpf>
+        <cnpj>1223</cnpj>
+        <data>22/04/2010</data>
+        <tipoexame>7</tipoexame>
+        <resultado>Negativo</resultado>
+    </exame>
+<exame><cpf>123123213213</cpf><cnpj>1457879</cnpj><data>2021-10-01</data><tipoexame>&#xF3; positivo</tipoexame><resultado>asdsad</resultado></exame></exames>

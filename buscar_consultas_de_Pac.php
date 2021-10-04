@@ -10,7 +10,7 @@ if(isset($_POST['BuscaConPac'])) {
     // $Scpf = $_SESSION['cpf'];
 
     // if ($_SESSION['cpf'] == $Scpf) {
-        $xml=simplexml_load_file("users/consultas.xml") or die ("<br>Erro ao abrir arquivo de consultas!");
+        $xml=simplexml_load_file("./db/consultas.xml") or die ("<br>Erro ao abrir arquivo de consultas!");
 
         foreach($xml->children() as $ch){
             if ($cpf == $ch->cpf) {

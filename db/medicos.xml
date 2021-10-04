@@ -1,0 +1,3 @@
+<?xml version="1.0"?>
+<medicos>
+<medico><nome>Roberto</nome><endereco>Rua Conde</endereco><telefone>999245782</telefone><email>roberto@gmail.com</email><especialidade>Neurologista</especialidade><crm>1283712</crm><password>roberto123</password></medico></medicos>

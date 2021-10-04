@@ -1,0 +1,3 @@
+<?xml version="1.0"?>
+<pacientes>
+<paciente><nome>Romeu</nome><endereco>Rua perimetral</endereco><telefone>098765673</telefone><email>romeu@gmail.com</email><genero>masculino</genero><idade>23</idade><cpf>05784598620</cpf></paciente></pacientes>

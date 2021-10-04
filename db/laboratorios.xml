@@ -1,0 +1,3 @@
+<?xml version="1.0"?>
+<laboratorios>
+<laboratorio><cnpj>098987678</cnpj><nome>Laborat&#xF3;rio Vita</nome><end>Rua Dez</end><telefone>998765414</telefone><email>vita@gmail.com</email><tipoexame>Todos</tipoexame><password>vita123</password><endereco>Rua Onze</endereco></laboratorio><laboratorio><cnpj>09878762</cnpj><nome>Clinica Mora</nome><end>Rua Conde</end><telefone>984786315</telefone><email>mora@gmail.com</email><tipoexame>Sangue</tipoexame><password>mora123</password></laboratorio></laboratorios>
