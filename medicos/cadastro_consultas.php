@@ -55,6 +55,7 @@ if ($_SESSION['crm'] != '') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/tailwind.css">
         <title>Cadastro de consultas - Bem Estar Saúde</title>
+        <script type="text/javascript" src="../public/js/validation.js"></script>
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -63,16 +64,16 @@ if ($_SESSION['crm'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <label>Insira o CPF do paciente: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="cpf" id="cpf">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="cpf" id="cpf" onfocusout="is_cpf()">
                 <label>Insira o nome do paciente: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="nome" id="nome">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="nome" id="nome" onfocusout="is_valid_name()">
                 <label>Data da consulta: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data" id="data">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data" id="data" onfocusout="is_empty(this)">
                 <label>Receita: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="receita" id="receita">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="receita" id="receita" onfocusout="is_empty(this)">
                 <label>Observações: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="obs" id="obs">
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadCon" value="Confirmar Consulta">
+                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="obs" id="obs" onfocusout="is_empty(this)">
+                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadCon" value="Confirmar Consulta" onclick="send_form()">
                 <?php
                     if ($error) {
                         echo '<p> Consulta com esse paciente já está cadastrada neste dia </p>' ; 

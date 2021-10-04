@@ -35,7 +35,15 @@ if ($_SESSION['crm'] == '') {
                     <h1 class="text-2xl	font-semibold">Consultas</h1>
                     <div class="flex items-center">
                         <button class='rounded-md w-auto h-8 px-4 mr-4 bg-blue-400 hover:bg-blue-500 text-white hover:cursor-pointer'> <a href="../medicos/alterar_cad_medico.php">Alterar cadastro</a></button>
-                        <span class="mr-2">Médico</span>
+                        <span class="mr-2">Médico - CRM:
+                            <span>
+                                <?php
+                                    echo "$crm";
+
+                                ?>
+                                
+                            </span>
+                        </span>
                         <img src="../public/images/imgAdmin.jpg" class="rounded-full h-12 w-12 border-green-500 border-2">
                     </div>
                 </header>

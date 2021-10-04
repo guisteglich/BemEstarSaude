@@ -40,6 +40,7 @@ if ($_SESSION['crm'] != '') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../public/css/tailwind.css">
         <title>Alterar médico - Bem Estar Saúde</title>
+        <script type="text/javascript" src="../public/js/validation.js"></script>
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
@@ -71,7 +72,7 @@ if ($_SESSION['crm'] != '') {
                 <label class='my-4'>Digite o novo valor da caixa marcada acima</label>
                 <input class='border border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="valorNovo" size="20" /></p> 
                 <br>
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="AltCadMed" value="Alterar Dados">
+                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="AltCadMed" value="Alterar Dados" onclick="send_form()">
             </form>
         </div>
     </body>
