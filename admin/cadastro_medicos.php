@@ -21,27 +21,48 @@ if ($_SESSION['login'] != '') {
         $crm = input($_POST["crm"]);
         $senha = input($_POST["password"]);
         
-        $xml = simplexml_load_file("../db/medicos.xml") or die ("Erro ao carregar arquivo de médicos!");
+        // $xml = simplexml_load_file("../db/medicos.xml") or die ("Erro ao carregar arquivo de médicos!");
 
-        foreach($xml->children() as $ch) {
-            if ($ch->nome == $nome) {
-                $error = true;
+        // foreach($xml->children() as $ch) {
+        //     if ($ch->nome == $nome) {
+        //         $error = true;
+        //     }
+        // }
+        // if ($error == false){
+        //     $node = $xml->addChild("medico");
+        //     $node->addChild("nome", $nome);
+        //     $node->addChild("endereco", $endereco);
+        //     $node->addChild("telefone", $telefone);
+        //     $node->addChild("email", $email);
+        //     $node->addChild("especialidade", $especialidade);
+        //     $node->addChild("crm", $crm);
+        //     $node->addChild("password", $senha);
+
+        //     $s = simplexml_import_dom($xml);
+        //     $s->saveXML ('../db/medicos.xml') or die ('Erro ao salvar');  
+            
+        // }
+        
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        try{
+            $conn = new PDO("mysql:host=$server", $user, $pass);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = sprintf("INSERT INTO medicos
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');", $crm, $nome, $end, $telefone, $email, $especialidade, $senha);
+            $conn->exec($sql);
+        
             }
+        catch(PDOException $e){
+            echo $sql . "<br" . $e->getMessage();
         }
-        if ($error == false){
-            $node = $xml->addChild("medico");
-            $node->addChild("nome", $nome);
-            $node->addChild("endereco", $endereco);
-            $node->addChild("telefone", $telefone);
-            $node->addChild("email", $email);
-            $node->addChild("especialidade", $especialidade);
-            $node->addChild("crm", $crm);
-            $node->addChild("password", $senha);
-
-            $s = simplexml_import_dom($xml);
-            $s->saveXML ('../db/medicos.xml') or die ('Erro ao salvar');
-            header('Location: medicos.php');
-        }
+        
+        $conn = null;
+        header('Location: medicos.php');
     }
 } else {
     header('Location: login.php');

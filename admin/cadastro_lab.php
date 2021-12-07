@@ -14,24 +14,44 @@ if ($_SESSION['login'] != '') {
         $tipoexame = $_POST['tipoexame'];
         $senha = $_POST['password'];
         
-        $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo!");
-        foreach($xml->children() as $lab) {
-            if ($lab->cnpj == $cnpj) {
-                $error = true;
+        // $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo!");
+        // foreach($xml->children() as $lab) {
+        //     if ($lab->cnpj == $cnpj) {
+        //         $error = true;
+        //     }
+        // }
+
+        // $add = $xml->addChild("laboratorio"); 
+        // $add -> addChild("cnpj", $cnpj);
+        // $add -> addChild("nome", $nome);
+        // $add -> addChild("end", $end);
+        // $add -> addChild("telefone", $telefone);
+        // $add -> addChild("email", $email);
+        // $add -> addChild("tipoexame", $tipoexame);
+        // $add->addChild("password", $senha);
+
+        // $s = simplexml_import_dom($xml);
+        // $s->saveXML('../db/laboratorios.xml') or die ('Erro ao salvar');
+
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        try{
+            $conn = new PDO("mysql:host=$server", $user, $pass);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = sprintf("INSERT INTO laboratorios
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');", $cnpj, $nome, $end, $telefone, $tipoexame, $senha);
+            $conn->exec($sql);
+        
             }
+        catch(PDOException $e){
+            echo $sql . "<br" . $e->getMessage();
         }
-
-        $add = $xml->addChild("laboratorio"); 
-        $add -> addChild("cnpj", $cnpj);
-        $add -> addChild("nome", $nome);
-        $add -> addChild("end", $end);
-        $add -> addChild("telefone", $telefone);
-        $add -> addChild("email", $email);
-        $add -> addChild("tipoexame", $tipoexame);
-        $add->addChild("password", $senha);
-
-        $s = simplexml_import_dom($xml);
-        $s->saveXML('../db/laboratorios.xml') or die ('Erro ao salvar');
+        
+        $conn = null;
         
         header('Location: index.php');
     }
