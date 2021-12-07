@@ -3,7 +3,7 @@
 - PHP;
 - HTML;
 - CSS;
-- MYSQL
+- MYSQL;
 
 ## :bulb: Frameworks utilizados:
 - Tailwind CSS;
