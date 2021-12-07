@@ -12,17 +12,24 @@ if ($_SESSION['login'] != '') {
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
 
-        $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
-        foreach($xml->children() as $ch) {
-            if ($ch->cnpj == $cnpj) {
-                $posicao = $contador;
-            }
-            $contador= $contador+1;
-        }
-        $xml->laboratorio[$posicao]->$alterar = $valor_novo;
-        $s = simplexml_import_dom($xml);
-        $s->saveXML ('../db/laboratorios.xml');
-        $sucesso = true;
+        // $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
+        // foreach($xml->children() as $ch) {
+        //     if ($ch->cnpj == $cnpj) {
+        //         $posicao = $contador;
+        //     }
+        //     $contador= $contador+1;
+        // }
+        // $xml->laboratorio[$posicao]->$alterar = $valor_novo;
+        // $s = simplexml_import_dom($xml);
+        // $s->saveXML ('../db/laboratorios.xml');
+        // $sucesso = true;
+
+        $sql = sprintf("UPDATE laboratorios
+        SET '%s' = '%s'
+        WHERE cnpj = '%s';", $alterar, $valor_novo, $cnpj);
+
+
+
         header('Location: index.php');
     }
 } else {

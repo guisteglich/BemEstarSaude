@@ -12,18 +12,23 @@ if ($_SESSION['login'] != '') {
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
     
-        $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
-        foreach($xml->children() as $ch) {
-            if ($ch->crm == $crm) {
+        // $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
+        // foreach($xml->children() as $ch) {
+        //     if ($ch->crm == $crm) {
                 
-                $posicao = $contador;
-            }
-            $contador= $contador+1;
-        }
-        $xml->medico[$posicao]->$alterar = $valor_novo;
-        $s = simplexml_import_dom($xml);
-        $s->saveXML ('../db/medicos.xml');
-        $sucesso = true;
+        //         $posicao = $contador;
+        //     }
+        //     $contador= $contador+1;
+        // }
+        // $xml->medico[$posicao]->$alterar = $valor_novo;
+        // $s = simplexml_import_dom($xml);
+        // $s->saveXML ('../db/medicos.xml');
+        // $sucesso = true;
+
+        $sql = sprintf("UPDATE medicos
+        SET '%s' = '%s'
+        WHERE crm = '%s';", $alterar, $valor_novo, $crm);
+
         header('Location: medicos.php');
     }
 } else {
