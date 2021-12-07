@@ -24,6 +24,15 @@ if ($_SESSION['login'] != '') {
         // $s->saveXML ('../db/laboratorios.xml');
         // $sucesso = true;
 
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        //$conn = new PDO("mysql:host=$server", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         $sql = sprintf("UPDATE laboratorios
         SET '%s' = '%s'
         WHERE cnpj = '%s';", $alterar, $valor_novo, $cnpj);

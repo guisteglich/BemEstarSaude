@@ -49,7 +49,8 @@ if ($_SESSION['login'] != '') {
         $db = "BemEstarSaude";
 
         try{
-            $conn = new PDO("mysql:host=$server", $user, $pass);
+            $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+            //$conn = new PDO("mysql:host=$server", $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
             $sql = sprintf("INSERT INTO medicos

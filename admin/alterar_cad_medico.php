@@ -25,6 +25,10 @@ if ($_SESSION['login'] != '') {
         // $s->saveXML ('../db/medicos.xml');
         // $sucesso = true;
 
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        //$conn = new PDO("mysql:host=$server", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         $sql = sprintf("UPDATE medicos
         SET '%s' = '%s'
         WHERE crm = '%s';", $alterar, $valor_novo, $crm);

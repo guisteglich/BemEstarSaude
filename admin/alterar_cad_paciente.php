@@ -23,6 +23,16 @@ if($_SESSION['login'] != '') {
         // $s->saveXML ('../db/pacientes.xml');
         // $sucesso = true;
 
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        //$conn = new PDO("mysql:host=$server", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
         $sql = sprintf("UPDATE pacientes
         SET '%s' = '%s'
         WHERE cpf = '%s';", $alterar, $valor_novo, $cpf);
