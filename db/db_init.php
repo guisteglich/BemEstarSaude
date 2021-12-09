@@ -62,19 +62,19 @@ try{
             VALUES ('%s', '%s');", $login, $password);
             $conn->exec($sql_admin);
 
-    // $sql_exames = "CREATE TABLE exames (
-    //     id INT UNSIGNED NOT NUL AUTO_INCREMENT,
-    //     nome VARCHAR(80) NOT NULL,
-    //     cpf INT UNSIGNED NOT NULL,
-    //     cnpj INT UNSIGNED NOT NULL,
-    //     data_exame VARCHAR(120) NOT NULL, 
-    //     tipo_exame VARCHAR(250) NOT NULL,
-    //     resultado VARCHAR(250) NOT NULL,        
-    //     PRIMARY KEY(id))
-    //     FOREIGN KEY (cpf) REFERENCES pacientes(cpf),
-    //     FOREIGN KEY (cnpj) REFERENCES medicos(cnpj);";
-    // $conn->exec($sql_exames);
-    // echo "Tabela de exames foi criada!";
+    $sql_exames = "CREATE TABLE exames (
+        id INT UNSIGNED NOT NUL AUTO_INCREMENT,
+        nome VARCHAR(80) NOT NULL,
+        cpf_paciente INT UNSIGNED NOT NULL,
+        cnpj_lab INT UNSIGNED NOT NULL,
+        data_exame VARCHAR(120) NOT NULL, 
+        tipo_exame VARCHAR(250) NOT NULL,
+        resultado VARCHAR(250) NOT NULL,        
+        PRIMARY KEY(id))
+        CONSTRAINT fk_ExamePaciente FOREIGN KEY (cpf_paciente) REFERENCES pacientes(cpf),
+        CONSTRAINT fk_ExameLab FOREIGN KEY (cnpj_lab) REFERENCES medicos(cnpj);";
+    $conn->exec($sql_exames);
+    echo "Tabela de exames foi criada!";
 
     //  $sql_consultas = "CREATE TABLE consultas (
     //      id_consulta int NOT NULL AUTO_INCREMENT,
@@ -85,8 +85,8 @@ try{
     //      receita VARCHAR(250) NOT NULL,
     //      obs VARCHAR(250) NOT NULL,        
     //      PRIMARY KEY(id_consulta),
-    //      FOREIGN KEY (cpf_paciente) REFERENCES pacientes(cpf),
-    //      FOREIGN KEY (crm_medico) REFERENCES medicos(crm));";
+    //      CONSTRAINT fk_ConsultaPaciente FOREIGN KEY (cpf_paciente) REFERENCES pacientes(cpf),
+    //      CONSTRAINT fk_ConsultaMed FOREIGN KEY (crm_medico) REFERENCES medicos(crm));";
     //  $conn->exec($sql_consultas);
     //  echo "Tabela de consultas foi criada!";
     
@@ -97,7 +97,7 @@ catch(PDOException $e){
     echo $sql_med . "<br" . $e->getMessage();
     echo $sql_pac . "<br" . $e->getMessage();
     echo $sql_users . "<br" . $e->getMessage();
-    //echo $sql_exames . "<br" . $e->getMessage();
+    echo $sql_exames . "<br" . $e->getMessage();
     //echo $sql_consultas . "<br" . $e->getMessage();        
 }
 
