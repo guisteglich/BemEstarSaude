@@ -40,13 +40,12 @@ if ($_SESSION['cnpj'] != '') {
     //     $confirmar = true;
         
     //     }
-    }
     try{
         $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
         //$conn = new PDO("mysql:host=$server", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = sprintf("INSERT INTO exame
+        $sql = sprintf("INSERT INTO exames
         VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $cnpj, $data, $tipoexame, $resultado);
         $conn->exec($sql);
     
@@ -57,6 +56,8 @@ if ($_SESSION['cnpj'] != '') {
         
         $conn = null;
         header('Location: info_exames.php');
+    }
+    
 } else {
     header('Location: login.php');
 }
@@ -75,7 +76,7 @@ if ($_SESSION['cnpj'] != '') {
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
-            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="CadLab" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="CadEx" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <div class='flex justify-center mb-5'>
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
