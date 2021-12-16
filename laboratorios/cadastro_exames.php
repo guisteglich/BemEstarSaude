@@ -45,7 +45,7 @@ if ($_SESSION['cnpj'] != '') {
         //$conn = new PDO("mysql:host=$server", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = sprintf("INSERT INTO exames
+        $sql = sprintf("INSERT INTO exames (nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado)
         VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $cnpj, $data, $tipoexame, $resultado);
         $conn->exec($sql);
     
