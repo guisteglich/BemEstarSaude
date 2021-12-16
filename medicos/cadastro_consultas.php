@@ -44,7 +44,7 @@ if ($_SESSION['crm'] != '') {
             //$conn = new PDO("mysql:host=$server", $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-            $sql = sprintf("INSERT INTO consultas
+            $sql = sprintf("INSERT INTO consultas (nome, cpf_paciente, crm_medico, data_consulta, receita, obs)
             VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $crm, $data, $receita, $obs);
             $conn->exec($sql);
         
