@@ -14,7 +14,7 @@ if ($_SESSION['login'] != '') {
 
     if(isset($_POST['CadPac'])) {
         $nome = input($_POST["nome"]);
-        $endereco = input($_POST["endereco"]);
+        $end = input($_POST["endereco"]);
         $telefone = input($_POST["telefone"]);
         $email = input($_POST["email"]);
         $genero = input($_POST["genero"]);
