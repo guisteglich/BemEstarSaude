@@ -63,32 +63,32 @@ try{
             $conn->exec($sql_admin);
 
     $sql_exames = "CREATE TABLE exames (
-        id INT UNSIGNED NOT NUL AUTO_INCREMENT,
+        id_exame INT UNSIGNED NOT NULL AUTO_INCREMENT,
         nome VARCHAR(80) NOT NULL,
         cpf_paciente INT UNSIGNED NOT NULL,
         cnpj_lab INT UNSIGNED NOT NULL,
-        data_exame VARCHAR(120) NOT NULL, 
+        data_exame VARCHAR(120) NOT NULL,
         tipo_exame VARCHAR(250) NOT NULL,
-        resultado VARCHAR(250) NOT NULL,        
-        PRIMARY KEY(id))
-        CONSTRAINT fk_ExamePaciente FOREIGN KEY (cpf_paciente) REFERENCES pacientes(cpf),
-        CONSTRAINT fk_ExameLab FOREIGN KEY (cnpj_lab) REFERENCES medicos(cnpj);";
+        resultado VARCHAR(250) NOT NULL,
+        PRIMARY KEY(id_exame),
+        FOREIGN KEY fk_ExamePaciente (cpf_paciente) REFERENCES pacientes(cpf),
+        FOREIGN KEY fk_ExameLab (cnpj_lab) REFERENCES laboratorios(cnpj));";
     $conn->exec($sql_exames);
     echo "Tabela de exames foi criada!";
-
-    //  $sql_consultas = "CREATE TABLE consultas (
-    //      id_consulta int NOT NULL AUTO_INCREMENT,
-    //      nome VARCHAR(80) NOT NULL,
-    //      cpf_paciente INT,
-    //      crm_medico INT,
-    //      data_consulta VARCHAR(120) NOT NULL, 
-    //      receita VARCHAR(250) NOT NULL,
-    //      obs VARCHAR(250) NOT NULL,        
-    //      PRIMARY KEY(id_consulta),
-    //      CONSTRAINT fk_ConsultaPaciente FOREIGN KEY (cpf_paciente) REFERENCES pacientes(cpf),
-    //      CONSTRAINT fk_ConsultaMed FOREIGN KEY (crm_medico) REFERENCES medicos(crm));";
-    //  $conn->exec($sql_consultas);
-    //  echo "Tabela de consultas foi criada!";
+        
+    $sql_consultas = "CREATE TABLE consultas (
+        id_consulta INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        nome VARCHAR(80) NOT NULL,
+        cpf_paciente INT UNSIGNED NOT NULL,
+        crm_medico INT UNSIGNED NOT NULL,
+        data_consulta VARCHAR(120) NOT NULL,
+        receita VARCHAR(250) NOT NULL,
+        obs VARCHAR(250) NOT NULL,
+        PRIMARY KEY(id_consulta),
+        FOREIGN KEY fk_ConsultaPaciente (cpf_paciente) REFERENCES pacientes(cpf),
+        FOREIGN KEY fk_ConsultaMed (crm_medico) REFERENCES medicos(crm));";
+    $conn->exec($sql_consultas);
+    echo "Tabela de consultas foi criada!";
     
 }
 
@@ -98,7 +98,7 @@ catch(PDOException $e){
     echo $sql_pac . "<br" . $e->getMessage();
     echo $sql_users . "<br" . $e->getMessage();
     echo $sql_exames . "<br" . $e->getMessage();
-    //echo $sql_consultas . "<br" . $e->getMessage();        
+    echo $sql_consultas . "<br" . $e->getMessage();        
 }
 
 $conn = null;
