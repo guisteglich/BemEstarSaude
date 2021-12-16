@@ -13,34 +13,50 @@ if ($_SESSION['cnpj'] != '') {
         $tipoexame = $_POST['tipoexame'];
         $resultado = $_POST['resultado'];
     
-        $xml=simplexml_load_file("../db/exames.xml") or die ("Erro ao abrir arquivo de exames!");
+    //     $xml=simplexml_load_file("../db/exames.xml") or die ("Erro ao abrir arquivo de exames!");
 
-        foreach($xml->children() as $ch) {
-            if ($ch->cnpj == $cnpj){
-                if ($ch->cpf == $cpf) {
-                    if ($ch->data == $data) {
-                        $error = true;    
-                    }
-                }
-            }
-    }
+    //     foreach($xml->children() as $ch) {
+    //         if ($ch->cnpj == $cnpj){
+    //             if ($ch->cpf == $cpf) {
+    //                 if ($ch->data == $data) {
+    //                     $error = true;    
+    //                 }
+    //             }
+    //         }
+    // }
 
-    if ($error == false){
-        $add = $xml->addChild("exame"); 
-        $add -> addChild("nome", $nome);
-        $add -> addChild("cpf", $cpf);
-        $add -> addChild("cnpj", $cnpj);
-        $add -> addChild("data", $data);
-        $add -> addChild("tipoexame", $tipoexame);
-        $add -> addChild("resultado", $resultado);
+    // if ($error == false){
+    //     $add = $xml->addChild("exame"); 
+    //     $add -> addChild("nome", $nome);
+    //     $add -> addChild("cpf", $cpf);
+    //     $add -> addChild("cnpj", $cnpj);
+    //     $add -> addChild("data", $data);
+    //     $add -> addChild("tipoexame", $tipoexame);
+    //     $add -> addChild("resultado", $resultado);
 
-        $s = simplexml_import_dom($xml);
-        $s->saveXML('../db/exames.xml') or die ('Erro ao salvar exame');
-        header('Location: index.php');
-        $confirmar = true;
+    //     $s = simplexml_import_dom($xml);
+    //     $s->saveXML('../db/exames.xml') or die ('Erro ao salvar exame');
+    //     header('Location: index.php');
+    //     $confirmar = true;
         
-        }
+    //     }
     }
+    try{
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        //$conn = new PDO("mysql:host=$server", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+        $sql = sprintf("INSERT INTO exame
+        VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $cnpj, $data, $tipoexame, $resultado);
+        $conn->exec($sql);
+    
+        }
+        catch(PDOException $e){
+            echo $sql . "<br" . $e->getMessage();
+        }
+        
+        $conn = null;
+        header('Location: info_exames.php');
 } else {
     header('Location: login.php');
 }
