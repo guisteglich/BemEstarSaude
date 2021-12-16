@@ -39,6 +39,22 @@ if ($_SESSION['crm'] != '') {
         //     header('Location: index.php');
         //     $confirmar = true;
         // }
+        try{
+            $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+            //$conn = new PDO("mysql:host=$server", $user, $pass);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = sprintf("INSERT INTO consultas
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $crm, $data, $receita, $obs);
+            $conn->exec($sql);
+        
+            }
+            catch(PDOException $e){
+                echo $sql . "<br" . $e->getMessage();
+            }
+            
+            $conn = null;
+            header('Location: info_consultas.php');
     }
 } else {
     header('Location: login.php');
