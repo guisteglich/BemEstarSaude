@@ -13,32 +13,32 @@ if ($_SESSION['crm'] != '') {
         $receita = $_POST['receita'];
         $data = $_POST['data'];
 
-        $xml=simplexml_load_file("../db/consultas.xml") or die ("Erro ao abrir arquivo de consultas!");
+        // $xml=simplexml_load_file("../db/consultas.xml") or die ("Erro ao abrir arquivo de consultas!");
 
-        foreach($xml->children() as $ch) {
-            if ($ch->crm == $crm){
-                if ($ch->cpf == $cpf) {
-                    if ($ch->data == $data) {
-                        $error = true;    
-                    }
-                }
-            }
-        }
+        // foreach($xml->children() as $ch) {
+        //     if ($ch->crm == $crm){
+        //         if ($ch->cpf == $cpf) {
+        //             if ($ch->data == $data) {
+        //                 $error = true;    
+        //             }
+        //         }
+        //     }
+        // }
 
-        if ($error == false){
-            $add = $xml->addChild("consulta"); 
-            $add -> addChild("nome", $nome);
-            $add -> addChild("cpf", $cpf);
-            $add -> addChild("crm", $crm);
-            $add -> addChild("data", $data);
-            $add -> addChild("receita", $receita);
-            $add -> addChild("obs", $obs);
+        // if ($error == false){
+        //     $add = $xml->addChild("consulta"); 
+        //     $add -> addChild("nome", $nome);
+        //     $add -> addChild("cpf", $cpf);
+        //     $add -> addChild("crm", $crm);
+        //     $add -> addChild("data", $data);
+        //     $add -> addChild("receita", $receita);
+        //     $add -> addChild("obs", $obs);
 
-            $s = simplexml_import_dom($xml);
-            $s->saveXML ('../db/consultas.xml');
-            header('Location: index.php');
-            $confirmar = true;
-        }
+        //     $s = simplexml_import_dom($xml);
+        //     $s->saveXML ('../db/consultas.xml');
+        //     header('Location: index.php');
+        //     $confirmar = true;
+        // }
     }
 } else {
     header('Location: login.php');
