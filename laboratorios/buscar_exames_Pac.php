@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if ($_SESSION['cnpj'] != '') {
     $encontrado = false;
@@ -9,17 +9,22 @@ if ($_SESSION['cnpj'] != '') {
         $cpf = $_POST['cpf'];
         $cnpj = $_SESSION['cnpj'];
 
-        $xml=simplexml_load_file("../db/exames.xml") or die ("<br>Erro ao abrir arquivo de consultas!");
 
-        foreach($xml->children() as $ch){
-            if ($cpf == $ch->cpf) {
-                if ($cnpj == $ch->cnpj){
-                    $encontrado = true;
-                }
-            }
-        }    
-        if (!$encontrado) {
-            $error = true; 
+        $sql = "SELECT * FROM `exames` WHERE cpf_paciente = $cpf";
+
+        $result = mysqli_query($connect, $sql) or die("Erro ao retornar dados");
+
+        $row = mysqli_num_rows($result);
+        
+        while($r=mysqli_fetch_object($result))
+        {
+            $res[]=$r;
+        }
+
+        if ($row >= 1) {
+            $encontrado = true; 
+        } else {
+            $error = true;
         }
     }
 } else {
@@ -55,20 +60,18 @@ if ($_SESSION['cnpj'] != '') {
                         echo '<p> Nenhum paciente ou laboratório com os dados inseridos foi encontrado </p>' ; 
                     }
                     if ($encontrado) {
-                        foreach($xml->children() as $ch) {
-                            if ($ch->cpf == $cpf) {
-                                if ($cnpj == $ch->cnpj){
-                                    echo "<br>";
-                                    echo '<table>';
-                                    echo "<tr><td> <b>Data:</b> $ch->data </td></tr>";
-                                    echo "<tr><td> <b>Tipo de exame:</b> $ch->tipoexame </td></tr>";
-                                    echo "<tr><td> <b>Resultado:</b> $ch->resultado </td></tr>";
-                                    echo "</table>";
-                                    echo "<br>";
-                                    echo "<hr>";
-                                }
+                        foreach($res as $ch) {
+                            if ($ch->cpf_paciente == $cpf) {
+                                echo "<br>";
+                                echo '<table>';
+                                echo "<tr><td> <b>Data:</b> $ch->data_exame </td></tr>";
+                                echo "<tr><td> <b>Tipo de exame:</b> $ch->tipo_exame </td></tr>";
+                                echo "<tr><td> <b>Resultado:</b> $ch->resultado </td></tr>";
+                                echo "</table>";
+                                echo "<br>";
+                                echo "<hr>";
                             } 
-                        }  
+                        }
                     }
                     ?>
                 </div>
