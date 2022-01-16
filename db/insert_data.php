@@ -89,8 +89,8 @@ while ($i <= 4) {
 $nome = array('Mateus', 'Andrews', 'Guilherme', 'João', 'Robledo');
 $cpf = array('15338260050', '47469441050', '88850783035', '78296304023', '17680046093');
 $crm = array('111', '222', '333', '444', '555');
-$data = array('31/04/2021', '23/05/2021-', '22/02/2021', '22/02/2021', '31/04/2021');
-$data_consulta_db = array('2021-04-31', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
+$data = array('31/04/2021', '23/05/2021', '22/02/2021', '22/02/2021', '31/04/2021');
+$data_consulta_db = array('2021-04-28', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
 $receita = array('Diclofenaco', 'Proparoxina', 'Creatina', 'Analgesico', 'Vitamina D');
 $obs = array('2 por dia', 'A cada 6 horas', '3  vezes na semana', '3 por dia', '4 por dia');
 
@@ -111,7 +111,7 @@ $nome = array('Mateus', 'Andrews', 'Guilherme', 'João', 'Robledo');
 $cpf = array('15338260050', '47469441050', '88850783035', '78296304023', '17680046093');
 $cnpj = array('98562258040355', '18262148506167', '38363128201124', '62562118405165', '92263556070835');
 $data = array('31/04/2021', '23/05/2021', '22/02/2021', '22/02/2021', '31/04/2021');
-$data_exame_db = array('2021-04-31', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
+$data_exame_db = array('2021-04-28', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
 $tipo = array('Colesterol ', 'Hemograma', 'Creatina', 'TGO', 'Exame de urina');
 $resultado = array('Normal', 'Normal', 'Abaixo', 'Abaixo', 'Normal');
 
