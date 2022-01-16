@@ -25,3 +25,7 @@ http://localhost/BemEstarSaude/db/db_init.php
 Link acesso rápido:
 
 > http://localhost/BemEstarSaude/
+
+Link phpMyAdmin
+
+> http://localhost/phpmyadmin/
