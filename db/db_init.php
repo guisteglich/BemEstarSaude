@@ -44,7 +44,7 @@ try{
         crm INT UNSIGNED NOT NULL,
         nome VARCHAR(80) NOT NULL,
         end VARCHAR(120) NOT NULL,
-        telefone INT NOT NULL,
+        telefone VARCHAR(12) NOT NULL,
         email VARCHAR(250) NOT NULL, 
         especialidade VARCHAR(250) NOT NULL, 
         password VARCHAR(80) NOT NULL,

@@ -8,7 +8,7 @@
         $strcon = mysqli_connect($server, $user, $pass, $db); 
         $sql = "SELECT * FROM `medicos`";
         $result = mysqli_query($strcon,$sql) or die("Erro ao retornar dados");
-
+        $num_rows = mysqli_num_rows($result);
         while($r=mysqli_fetch_object($result))
         {
             $res[]=$r;
@@ -73,17 +73,20 @@
                     <li>Opções</li>
                 </ul>
                 <?php                   
-                
-                    foreach($res as $ch){
-                        echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
-                        echo "<li>$ch->nome</li>";
-                        echo "<li>$ch->telefone</li>";
-                        echo "<li>$ch->crm</li>";
-                        echo "<li>";
-                        echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_med.php?crm=$ch->crm'>Ver mais</a></button>";
-                        echo "</li>";
-                        echo "</ul>";
-                    }
+                    if ($num_rows > 0) {
+                        foreach($res as $ch){
+                            echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
+                            echo "<li>$ch->nome</li>";
+                            echo "<li>$ch->telefone</li>";
+                            echo "<li>$ch->crm</li>";
+                            echo "<li>";
+                            echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_med.php?crm=$ch->crm'>Ver mais</a></button>";
+                            echo "</li>";
+                            echo "</ul>";
+                        }
+                    }  else{
+                        echo '<div class="text-center m-2"> Não há médicos cadastrados </div>';
+                    }                  
                 ?>
         </div>
     </div>
