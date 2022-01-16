@@ -97,7 +97,7 @@ if ($_SESSION['crm'] == '') {
                     <div class="flex flex-row items-center">
                         <!-- Cadastro e busca -->
                         <button class='rounded-md w-auto h-8 px-4 bg-green-400 hover:bg-green-500 text-white hover:cursor-pointer'> <a href="../medicos/cadastro_consultas.php">Cadastrar consulta</a></button>
-                        <button class='rounded-md w-auto h-8 px-4 ml-2 w-1/2w-1/2w-1/2w-1/2 hover:bg-yellow-500 text-white hover:cursor-pointer'> <a href="../medicos/buscar_consultas_de_Pac.php">Histórico/Consultas de Paciente</a></button>
+                        <button class='rounded-md w-auto h-8 px-4 ml-2 w-1/2w-1/2w-1/2w-1/2 bg-yellow-400 hover:bg-yellow-500 text-white hover:cursor-pointer'> <a href="../medicos/buscar_consultas_de_Pac.php">Histórico/Consultas de Paciente</a></button>
                     </div>
                     <ul class="grid grid-cols-4 py-8 border-b-2">
                         <li>Data</li>
