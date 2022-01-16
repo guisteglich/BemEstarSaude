@@ -22,6 +22,12 @@ Criar tabaleas:
 http://localhost/BemEstarSaude/db/db_init.php
 ~~~
 
+Insere dados automaticamente:
+
+~~~javascript
+http://localhost/BemEstarSaude/db/db_init.php
+~~~
+
 Link acesso rápido:
 
 > http://localhost/BemEstarSaude/
