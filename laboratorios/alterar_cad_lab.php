@@ -12,21 +12,16 @@ if ($_SESSION['cnpj'] != '') {
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
 
-        if ($_SESSION['cnpj'] == $cnpj) { 
-            $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
-            foreach($xml->children() as $ch) {
-                if ($ch->cnpj == $cnpj) {
-                    $posicao = $contador;
-                }
-                $contador= $contador+1;
-            }
-            $xml->laboratorio[$posicao]->$alterar = $valor_novo;
-            $s = simplexml_import_dom($xml);
-            $s->saveXML ('../db/laboratorios.xml');
-            header('Location: index.php');
-        }else{
-            $error = true;
-        }
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "UPDATE laboratorios SET $alterar = '$valor_novo' WHERE cnpj = $cnpj";
+        $conn->query($sql);
     } 
 } else {
     header('Location: login.php'); 
