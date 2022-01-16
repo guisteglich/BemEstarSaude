@@ -1,40 +1,31 @@
 <?php
+include '../db/db_connect.php';
+
 $error = false;
 if(isset($_POST['cadastrar'])) {
     if (empty($_POST['login']) OR empty($_POST['password'])){
         header('Location: login.php');
     }
-    $usuario = $_POST['login'];
-    $senha = $_POST['password'];
-    $contador = 0;
-    $posicao = 0;
+    $username = $_POST['login'];
+    $password= $_POST['password'];
 
-    $xml=simplexml_load_file("../db/administradores.xml") or die ("Erro ao abrir arquivo de administradores!");
+    $query = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
 
-    foreach($xml->children() as $sk) {
-        if ($sk->login == $usuario) {
-            $posicao = $contador;
-            echo $posicao;
-        }
-        $contador= $contador+1;
-    }   
-        if($usuario == $xml->adm[$posicao]->login){
-     
-            if($senha == $xml->adm[$posicao]->password){
-                // $cookie_name = "user/" . $usuario;
-                // $cookie_value = $usuario;
-                // setcookie($cookie_name, $cookie_value, time() + (3600 * 3), "/"); // 3 horas
+    $result = mysqli_query($connect, $query);
 
-                session_start();
-                $_SESSION['login'] = $usuario;
-                header('Location: index.php');
-                die; 
-            }
-        }
+    $row = mysqli_num_rows($result);
+
+    if ($row == 1) {
+        $_SESSION['login'] = $username;
+        header('Location: index.php');
+        exit();
+    } else {
+        header('Location: login.php');
+        exit();
+    }
     
     $error = true;
 }
-
 ?>
 
 

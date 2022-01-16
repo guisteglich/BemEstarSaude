@@ -1,31 +1,29 @@
 <?php
+include '../db/db_connect.php';
+
 $error = false;
 if(isset($_POST['cadastrar'])) {
     if (empty($_POST['login']) OR empty($_POST['password'])){
         header('Location: login.php');
     }
-
     $crm = $_POST['crm'];
-    $senha = $_POST['password'];
-    $contador = 0;
-    $posicao = 0;
+    $password= $_POST['password'];
 
-    $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
+    $query = "SELECT * FROM medicos WHERE crm = '$crm' AND password = '$password'";
 
-    foreach($xml->children() as $ch) {
-        if ($ch->crm == $crm) {
-            $posicao = $contador;
-        }
-        $contador= $contador+1;
-    }   
-        if($crm == $xml->medico[$posicao]->crm){
-            if($senha == $xml->medico[$posicao]->password){
-                session_start();
-                $_SESSION['crm'] = $crm;
-                header('Location: index.php');
-                die; 
-            }
-        }
+    $result = mysqli_query($connect, $query);
+
+    $row = mysqli_num_rows($result);
+
+    if ($row == 1) {
+        $_SESSION['crm'] = $crm;
+        header('Location: index.php');
+        exit();
+    } else {
+        header('Location: login.php');
+        exit();
+    }
+    
     $error = true;
 }
 ?>

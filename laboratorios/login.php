@@ -1,39 +1,31 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 $error = false;
-
 if(isset($_POST['cadastrar'])) {
-    if (empty($_POST['cnpj']) OR empty($_POST['password'])){
-        header('Location: login_lab.php');
+    if (empty($_POST['login']) OR empty($_POST['password'])){
+        header('Location: login.php');
     }
     $cnpj = $_POST['cnpj'];
-    $senha = $_POST['password'];
-    $contador = 0;
-    $posicao = 0;
+    $password= $_POST['password'];
 
-    $xml=simplexml_load_file("../db/laboratorios.xml") or die ("Erro ao abrir arquivo de laboratórios!");
-    foreach($xml->children() as $ch) {
-        if ($ch->cnpj == $cnpj) {
-            $posicao = $contador;
-        }
-        $contador= $contador+1;
-    }   
-        if($cnpj == $xml->laboratorio[$posicao]->cnpj){
-     
-            if($senha == $xml->laboratorio[$posicao]->password){
+    $query = "SELECT * FROM laboratorios WHERE cnpj = '$cnpj' AND password = '$password'";
 
-                session_start();
-                $_SESSION['cnpj'] = $cnpj;
-                header('Location: index.php');
-                // header('Location: home_lab.php');
-                die; 
-            }
-        }
+    $result = mysqli_query($connect, $query);
+
+    $row = mysqli_num_rows($result);
+
+    if ($row == 1) {
+        $_SESSION['cnpj'] = $cnpj;
+        header('Location: index.php');
+        exit();
+    } else {
+        header('Location: login.php');
+        exit();
+    }
     
     $error = true;
 }
-
 ?>
 
 <!DOCTYPE html>
