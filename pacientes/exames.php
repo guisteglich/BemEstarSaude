@@ -1,20 +1,22 @@
 <?php
-
+include '../db/db_connect.php';
 $encontrado = false;
 $error = false;
 
 if(isset($_POST['BuscaConPac'])) {
     $cpf = $_POST['cpf'];
 
-    $xml=simplexml_load_file("../db/exames.xml") or die ("<br>Erro ao abrir arquivo de consultas!");
-
-    foreach($xml->children() as $ch){
-        if ($cpf == $ch->cpf) {
-            $encontrado = true;
-        }
-    }    
-    if (!$encontrado) {
-        $error = true; 
+    $sql = "SELECT * FROM `exames` WHERE cpf_paciente = $cpf";
+    $result = mysqli_query($connect,$sql) or die("Erro ao retornar dados");
+    $num_rows = mysqli_num_rows($result);
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
+    if ($num_rows >= 1) {
+        $encontrado = true; 
+    } else {
+        $error = true;
     }
 }
 
@@ -46,12 +48,12 @@ if(isset($_POST['BuscaConPac'])) {
                         echo "<p class='text-red-500'> Nenhum paciente com o CPF inserido foi encontrado </p>"; 
                     }
                     if ($encontrado) {
-                        foreach($xml->children() as $ch) {
-                            if ($ch->cpf == $cpf) {
+                        foreach($res as $ch) {
+                            if ($ch->cpf_paciente == $cpf) {
                                 echo "<br>";
                                 echo '<table>';
-                                echo "<tr><td> <b>Data:</b> $ch->data </td></tr>";
-                                echo "<tr><td> <b>Tipo de exame:</b> $ch->tipoexame </td></tr>";
+                                echo "<tr><td> <b>Data:</b> $ch->data_exame </td></tr>";
+                                echo "<tr><td> <b>Tipo de exame:</b> $ch->tipo_exame </td></tr>";
                                 echo "<tr><td> <b>Resultado:</b> $ch->resultado </td></tr>";
                                 echo "</table>";
                                 echo "<br>";
