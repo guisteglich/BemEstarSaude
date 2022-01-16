@@ -26,6 +26,6 @@ Link acesso rápido:
 
 > http://localhost/BemEstarSaude/
 
-Link phpMyAdmin
+Link acesso rápido phpMyAdmin:
 
 > http://localhost/phpmyadmin/
