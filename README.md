@@ -25,7 +25,7 @@ http://localhost/BemEstarSaude/db/db_init.php
 Insere dados automaticamente:
 
 ~~~javascript
-http://localhost/BemEstarSaude/db/db_init.php
+http://localhost/BemEstarSaude/db/insert_data.php
 ~~~
 
 Link acesso rápido:
