@@ -42,6 +42,15 @@ if ($_SESSION['crm'] == '') {
             $resultados[]=$r;
         }
     }
+
+    if(isset($_POST['count_consulta_anual'])) {
+        $data_year = $_POST['year'];
+        $query_anual = "SELECT * FROM consultas WHERE YEAR(data_consulta_db) = $data_year";
+
+        $results_year = mysqli_query($connect, $query_anual);
+        $num_rows_consultas_anuais = mysqli_num_rows($results_year);
+        $media_num_rows_consultas_anuais = round(($num_rows_consultas_anuais)/12, 2);
+    }
 }
 ?>
 
@@ -118,23 +127,48 @@ if ($_SESSION['crm'] == '') {
                     ?>
                 </div>
                 <div>
-                <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_consulta" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    
-                    <label>Data inicio: </label>
-                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_start" id="data" onfocusout="is_empty(this)">
-                    
+                    <div> Consultas por período </div>
+                    <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_consulta" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        
+                        <label>Data inicio: </label>
+                        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_start" id="data" onfocusout="is_empty(this)">
+                        
 
-                    <label>Data fim: </label>
-                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_end" id="data" onfocusout="is_empty(this)">
-                    <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_consulta" value="Visualizar número de consultas" onclick="send_form()">
+                        <label>Data fim: </label>
+                        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_end" id="data" onfocusout="is_empty(this)">
+                        <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_consulta" value="Visualizar número de consultas" onclick="send_form()">
+                        
+                    </form>
                     
-                </form>
-                
-                <?php
-                    echo "<div>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas consulta(s)</div>";
-                ?>
+                    <?php
+                        if (isset($formated_data_start)){
+                            echo "<div>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas consulta(s)</div>";
+                        }
+                        
+                    ?>
 
                 </div>
+
+                <div>
+                    <div> Consultas anual </div>
+                    <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_consulta_anual" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        
+                        <label>Ano: </label>
+                        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="year" id="data" onfocusout="is_empty(this)">
+                        
+                        <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_consulta_anual" value="Visualizar número de consultas anuais" onclick="send_form()">
+                        
+                    </form>
+                    
+                    <?php
+                        if (isset($data_year)){
+                            echo "<div>O total de consultas no ano de $data_year foi de $num_rows_consultas_anuais consulta(s)</div>";
+                            echo "<div>A média de consultas no ano de $data_year foi de $media_num_rows_consultas_anuais consulta(s)</div>";
+                        }
+                    ?>
+
+                </div>
+
             </div>
         </div>
     </body>
