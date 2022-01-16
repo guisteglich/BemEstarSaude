@@ -1,8 +1,15 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if ($_SESSION['cnpj'] != '') {
-    $cpf_url = $_GET['cpf'];
+    $id_url = $_GET['id'];
+    $sql = "SELECT * FROM `exames` WHERE id_exame = $id_url";
+    $result = mysqli_query($connect,$sql) or die("Erro ao retornar dados");
+    $num_rows = mysqli_num_rows($result);
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 } else {
     header('Location: login.php');
 }
@@ -27,22 +34,21 @@ if ($_SESSION['cnpj'] != '') {
                     <?php
                         $xml=simplexml_load_file("../db/exames.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
                     
-                        foreach($xml->children() as $ch){
-                            if ($ch->cpf == $cpf_url) {
+                        foreach($res as $ch){
+                            if ($ch->id_exame == $id_url) {
                                 echo "<br>";
                                 echo "<div> <b>Nome:</b> <span> $ch->nome </span> </div>";
                                 echo "<br>";
-                                echo "<div> <b>CPF:</b> <span> $ch->cpf </span> </div>";
+                                echo "<div> <b>CPF:</b> <span> $ch->cpf_paciente </span> </div>";
                                 echo "<br>";
-                                echo "<div> <b>CNPJ</b>: <span> $ch->cnpj </span> </div>";
+                                echo "<div> <b>CNPJ</b>: <span> $ch->cnpj_lab </span> </div>";
                                 echo "<br>";          
-                                echo "<div> <b>Data:</b> <span> $ch->data </span> </div>";
+                                echo "<div> <b>Data:</b> <span> $ch->data_exame </span> </div>";
                                 echo "<br>";                            
-                                echo "<div> <b>Tipo de Exame:</b> <span> $ch->tipoexame </span> </div>";
+                                echo "<div> <b>Tipo de Exame:</b> <span> $ch->tipo_exame </span> </div>";
                                 echo "<br>";                           
                                 echo "<div> <b>Resultado:</b> <span> $ch->resultado </span> </div>";   
-                                echo "<br>";
-                                echo "===================================";                           
+                                echo "<br>";                           
                             } 
                         }
                     ?>  

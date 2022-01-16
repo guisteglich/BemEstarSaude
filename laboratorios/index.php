@@ -1,9 +1,17 @@
 <?php
-session_start();
+// session_start();
+include '../db/db_connect.php';
 if ($_SESSION['cnpj'] == '') {
     header('Location: login.php');
 } else {
     $cnpj = $_SESSION['cnpj'];
+    $sql = "SELECT * FROM `exames` WHERE cnpj_lab = $cnpj";
+    $result = mysqli_query($connect,$sql) or die("Erro ao retornar dados");
+    $num_rows = mysqli_num_rows($result);
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 }
 ?>
 
@@ -60,20 +68,22 @@ if ($_SESSION['cnpj'] == '') {
                 </ul>
                 <!-- A partir daqui -->
                 <?php
-                    $xml=simplexml_load_file("../db/exames.xml") or die ("<br>Erro ao abrir arquivo de exames!");
-                
-                    foreach($xml->children() as $ch){
-                        if ($ch->cnpj == $cnpj) {
-                            echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
-                            echo "<li>$ch->cpf</li>";
-                            echo "<li>$ch->nome</li>";
-                            echo "<li>$ch->tipoexame</li>";
-                            echo "<li>";
-                            echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../laboratorios/info_exames.php?cpf=$ch->cpf'>Ver mais</a></button>";
-                            echo "</li>";
-                            echo "</ul>";                        
-                        } 
-                        
+                    if (isset($num_rows) and $num_rows > 0) {
+                        foreach($res as $ch){
+                            if ($ch->cnpj_lab == $cnpj) {
+                                echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
+                                echo "<li>$ch->cpf_paciente</li>";
+                                echo "<li>$ch->nome</li>";
+                                echo "<li>$ch->tipo_exame</li>";
+                                echo "<li>";
+                                echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../laboratorios/info_exames.php?id=$ch->id_exame'>Ver mais</a></button>";
+                                echo "</li>";
+                                echo "</ul>";                        
+                            } 
+                            
+                        }
+                    }else{
+                        echo "<div class='text-center m-2'> Não há exames registrados </div>"; 
                     }
                 ?>
         </div>

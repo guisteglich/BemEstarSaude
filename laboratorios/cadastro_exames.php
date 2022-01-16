@@ -10,10 +10,12 @@ if ($_SESSION['cnpj'] != '') {
         $cpf = $_POST['cpf'];
         $nome = $_POST['nome'];
         $data = $_POST['data'];
+        $date=date_create($data);
+        $formated_data = date_format($date,"d/m/Y");
         $tipoexame = $_POST['tipoexame'];
         $resultado = $_POST['resultado'];
             
-        $query  = "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado) VALUES('$nome', '$cpf', '$cnpj', '$data', '$tipoexame', '$resultado');";
+        $query  = "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado) VALUES('$nome', '$cpf', '$cnpj', '$formated_data', '$tipoexame', '$resultado');";
 
         $result = mysqli_query($connect, $query);
 
