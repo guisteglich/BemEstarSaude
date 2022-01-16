@@ -72,7 +72,6 @@ if ($_SESSION['login'] != '') {
                     <li>Opções</li>
                 </ul>
                 <?php
-                    // $xml=simplexml_load_file("../db/laboratorios.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
                     if ($num_rows > 0) {
                         foreach($res as $ch){
                             echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";

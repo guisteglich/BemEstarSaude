@@ -36,9 +36,7 @@ if ($_SESSION['login'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <div class='flex flex-col items-center'>
-                    <?php
-                        // $xml=simplexml_load_file("../db/laboratorios.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
-                    
+                    <?php                    
                         foreach($res as $ch){
                             if ($ch->cnpj == $cnpj_url) {
                                 echo "<div> <b>CNPJ:</b> <span> $ch->cnpj </span> </div>";

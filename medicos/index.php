@@ -71,9 +71,7 @@ if ($_SESSION['crm'] == '') {
                         <li>Nome</li>
                         <li>Opções</li>
                     </ul>
-                    <?php
-                        $xml=simplexml_load_file("../db/consultas.xml") or die ("<br>Erro ao abrir arquivo de consulta!");
-                    
+                    <?php                    
                         foreach($res as $ch){
                             if ($ch->crm_medico == $crm) {
                                 echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";

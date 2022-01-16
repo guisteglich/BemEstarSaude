@@ -37,9 +37,7 @@ if ($_SESSION['login'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <div class='flex flex-col items-center'>
-                    <?php
-                        $xml=simplexml_load_file("../db/medicos.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
-                    
+                    <?php                    
                         foreach($res as $ch){
                             if ($ch->crm == $crm_url) {
                                 echo "<div> <b>CRM:</b> <span> $ch->crm </span> </div>";

@@ -20,28 +20,6 @@ if ($_SESSION['login'] != '') {
         $genero = input($_POST["genero"]);
         $idade = input($_POST["idade"]);
         $cpf = input($_POST["cpf"]);
-        
-        // $xml=simplexml_load_file("../db/pacientes.xml") or die ("Erro ao abrir o arquivo de pacientes!");
-
-        // foreach($xml->children() as $ch) {
-        //     if ($ch->cpf == $cpf) {
-        //         $error = true;
-        //     }
-        // }
-        // if ($error == false){
-        //     $node = $xml->addChild("paciente"); 
-        //     $node->addChild("nome", $nome);
-        //     $node->addChild("endereco", $endereco);
-        //     $node->addChild("telefone", $telefone);
-        //     $node->addChild("email", $email);
-        //     $node->addChild("genero", $genero);
-        //     $node->addChild("idade", $idade);
-        //     $node->addChild("cpf", $cpf);
-            
-        //     $save = simplexml_import_dom($xml);    
-        //     $save->saveXML ('../db/pacientes.xml') or die ('Erro ao salvar');
-            
-        // }
 
         $server="localhost";
         $user="root";
@@ -50,7 +28,6 @@ if ($_SESSION['login'] != '') {
 
         try{
             $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-            //$conn = new PDO("mysql:host=$server", $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
             $sql = sprintf("INSERT INTO pacientes

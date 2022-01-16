@@ -32,8 +32,6 @@ if ($_SESSION['cnpj'] != '') {
                 </div>
                 <div class='flex flex-col items-center'>
                     <?php
-                        $xml=simplexml_load_file("../db/exames.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
-                    
                         foreach($res as $ch){
                             if ($ch->id_exame == $id_url) {
                                 echo "<br>";

@@ -36,9 +36,7 @@ if ($_SESSION['login'] != '') {
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
                 <div class='flex flex-col items-center'>
-                    <?php
-                        $xml=simplexml_load_file("../db/pacientes.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
-                    
+                    <?php                    
                         foreach($res as $ch){
                             if ($ch->cpf == $cpf_url) {
                                 echo "<div> <b>CPF:</b> <span> $ch->cpf </span> </div>";
