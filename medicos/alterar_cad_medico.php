@@ -12,18 +12,16 @@ if ($_SESSION['crm'] != '') {
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
     
-        $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
-        foreach($xml->children() as $ch) {
-            if ($ch->crm == $crm) {
-                
-                $posicao = $contador;
-            }
-            $contador= $contador+1;
-        }
-        $xml->medico[$posicao]->$alterar = $valor_novo;
-        $s = simplexml_import_dom($xml);
-        $s->saveXML ('../db/medicos.xml');
-        $sucesso = true;
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $db = "BemEstarSaude";
+
+        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $sql = "UPDATE medicos SET $alterar = '$valor_novo' WHERE crm = $crm";
+        $conn->query($sql);
         header('Location: index.php');
     }
 } else {
@@ -44,7 +42,7 @@ if ($_SESSION['crm'] != '') {
     </head>
     <body class='bg-gray-200'>
         <div class='flex justify-center items-center w-screen h-screen'>
-            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="CadLab" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="AltCadMed" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <div class='flex justify-center mb-5'>
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if($_SESSION['crm'] != '') {
     $encontrado = false;
     $error = false;
@@ -7,15 +8,23 @@ if($_SESSION['crm'] != '') {
     if(isset($_POST['BuscaConPac'])) {
         $cpf = $_POST['cpf'];
 
-        $xml=simplexml_load_file("../db/consultas.xml") or die ("<br>Erro ao abrir arquivo de consultas!");
+        include '../db/db_connect.php';
 
-        foreach($xml->children() as $ch){
-            if ($cpf == $ch->cpf) {
-                $encontrado = true;
-            }
-        }    
-        if (!$encontrado) {
-            $error = true; 
+        $sql = "SELECT * FROM `consultas` WHERE cpf_paciente = $cpf";
+
+        $result = mysqli_query($connect, $sql) or die("Erro ao retornar dados");
+
+        // $row = mysqli_num_rows($result);
+        
+        while($r=mysqli_fetch_object($result))
+        {
+            $res[]=$r;
+        }
+
+        if ($row >= 1) {
+            $encontrado = true; 
+        } else {
+            $error = true;
         }
     }
 } else {
@@ -45,17 +54,17 @@ if($_SESSION['crm'] != '') {
                         <input class='rounded-md w-auto px-4 h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="BuscaConPac" value="Buscar consultas">
                     </form>
                     <?php
-                    if ($error) {
-                        echo "<p class='text-red-500'> Nenhum paciente com o CPF inserido foi encontrado </p>"; 
-                    }
+                    // if ($error) {
+                        // echo "<p class='text-red-500'> Nenhum paciente com o CPF inserido foi encontrado </p>"; 
+                    // }
                     if ($encontrado) {
-                        foreach($xml->children() as $ch) {
-                            if ($ch->cpf == $cpf) {
+                        foreach($res as $ch) {
+                            if ($ch->cpf_paciente == $cpf) {
                                 echo "<br>";
                                 echo '<table>';
-                                echo "<tr><td> <b>CRM do seu médico:</b> $ch->crm </td></tr>";
+                                echo "<tr><td> <b>CRM do seu médico:</b> $ch->crm_medico </td></tr>";
                                 echo "<tr><td> <b>Medicamento recomendado:</b> $ch->receita </td></tr>";
-                                echo "<tr><td> <b>Dia que foi realizada a consulta:</b> $ch->data </td></tr>";
+                                echo "<tr><td> <b>Dia que foi realizada a consulta:</b> $ch->data_consulta</td></tr>";
                                 echo "</table>";
                                 echo "<br>";
                                 echo "<hr>";

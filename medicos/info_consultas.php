@@ -3,6 +3,17 @@ session_start();
 
 if ($_SESSION['crm'] != '') {
     $cpf_url = $_GET['cpf'];
+
+    include '../db/db_connect.php';
+
+    $sql = "SELECT * FROM `consultas` WHERE cpf_paciente = $cpf_url";
+
+    $result = mysqli_query($connect, $sql) or die("Erro ao retornar dados");
+    
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 } else {
     header('Location: login.php');
 }
@@ -27,16 +38,16 @@ if ($_SESSION['crm'] != '') {
                     <?php
                         $xml=simplexml_load_file("../db/consultas.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
                     
-                        foreach($xml->children() as $ch){
-                            if ($ch->cpf == $cpf_url) {
+                        foreach($res as $ch){
+                            if ($ch->cpf_paciente == $cpf_url) {
                                 echo "<br>";
                                 echo "<div> <b>Nome:</b> <span> $ch->nome </span> </div>";
                                 echo "<br>";
-                                echo "<div> <b>CPF:</b> <span> $ch->cpf </span> </div>";
+                                echo "<div> <b>CPF:</b> <span> $ch->cpf_paciente </span> </div>";
                                 echo "<br>";
-                                echo "<div> <b>CRM</b>: <span> $ch->crm </span> </div>";
+                                echo "<div> <b>CRM</b>: <span> $ch->crm_medico </span> </div>";
                                 echo "<br>";          
-                                echo "<div> <b>Data:</b> <span> $ch->data </span> </div>";
+                                echo "<div> <b>Data:</b> <span> $ch->data_consulta </span> </div>";
                                 echo "<br>";                            
                                 echo "<div> <b>Receita:</b> <span> $ch->receita </span> </div>";
                                 echo "<br>";                           

@@ -1,9 +1,23 @@
 <?php
+
 session_start();
 if ($_SESSION['crm'] == '') {
     header('Location: login.php');
 } else {
     $crm = $_SESSION['crm'];
+
+    include '../db/db_connect.php';
+
+    $sql = "SELECT * FROM `consultas`";
+
+    $result = mysqli_query($connect, $sql) or die("Erro ao retornar dados");
+
+    // $row = mysqli_num_rows($result);
+    
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 }
 ?>
 
@@ -62,14 +76,14 @@ if ($_SESSION['crm'] == '') {
                     <?php
                         $xml=simplexml_load_file("../db/consultas.xml") or die ("<br>Erro ao abrir arquivo de consulta!");
                     
-                        foreach($xml->children() as $ch){
-                            if ($ch->crm == $crm) {
+                        foreach($res as $ch){
+                            if ($ch->crm_medico == $crm) {
                                 echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
-                                echo "<li>$ch->data</li>";
-                                echo "<li>$ch->cpf</li>";
+                                echo "<li>$ch->data_consulta</li>";
+                                echo "<li>$ch->cpf_paciente</li>";
                                 echo "<li>$ch->nome</li>";
                                 echo "<li>";
-                                echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../medicos/info_consultas.php?cpf=$ch->cpf'>Ver mais</a></button>";
+                                echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../medicos/info_consultas.php?cpf=$ch->cpf_paciente'>Ver mais</a></button>";
                                 echo "</li>";
                                 echo "</ul>";                          
                             } 
