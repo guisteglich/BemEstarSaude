@@ -1,8 +1,23 @@
 <?php
-session_start();
-if ($_SESSION['login'] == '') {
-    header("Location: login.php");
-}
+    session_start();
+    if ($_SESSION['login'] != '') {
+        $server = "localhost";
+        $user = "root";
+        $pass = "";
+        $db = "BemEstarSaude";
+        $strcon = mysqli_connect($server, $user, $pass, $db); 
+        $sql = "SELECT * FROM `medicos`";
+        $result = mysqli_query($strcon,$sql) or die("Erro ao retornar dados");
+
+        while($r=mysqli_fetch_object($result))
+        {
+            $res[]=$r;
+        }
+
+            
+    }else{
+        header("Location: login.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +72,9 @@ if ($_SESSION['login'] == '') {
                     <li>CRM</li>
                     <li>Opções</li>
                 </ul>
-                <?php
-                    $xml=simplexml_load_file("../db/medicos.xml") or die ("<br>Erro ao abrir arquivo de médicos!");
+                <?php                   
                 
-                    foreach($xml->children() as $ch){
+                    foreach($res as $ch){
                         echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
                         echo "<li>$ch->nome</li>";
                         echo "<li>$ch->telefone</li>";
