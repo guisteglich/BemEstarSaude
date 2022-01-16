@@ -20,7 +20,7 @@ if ($_SESSION['login'] != '') {
         // $db = "BemEstarSaude";
         include '../db/db_connect.php';
         
-        $query  = "INSERT INTO laboratorios(cnpj, nome, end, telefone, tipo_exame, password) VALUES('$cnpj', '$nome', '$end', '$telefone', '$tipoexame', '$senha');";
+        $query  = "INSERT INTO laboratorios(cnpj, nome, end, telefone, tipo_exame, email, password) VALUES('$cnpj', '$nome', '$end', '$telefone', '$tipoexame', '$email', '$senha');";
 
         $result = mysqli_query($connect, $query);
 

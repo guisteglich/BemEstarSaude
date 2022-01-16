@@ -33,9 +33,8 @@ if ($_SESSION['login'] != '') {
         //$conn = new PDO("mysql:host=$server", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = sprintf("UPDATE laboratorios
-        SET '%s' = '%s'
-        WHERE cnpj = '%s';", $alterar, $valor_novo, $cnpj);
+        $sql = "UPDATE laboratorios SET $alterar = '$valor_novo' WHERE cnpj = $cnpj";
+        $conn->query($sql);
 
 
 

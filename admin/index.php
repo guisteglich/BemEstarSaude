@@ -1,6 +1,21 @@
 <?php
 session_start();
-if ($_SESSION['login'] == '') {
+if ($_SESSION['login'] != '') {
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "BemEstarSaude";
+    $strcon = mysqli_connect($server, $user, $pass, $db); 
+    $sql = "SELECT * FROM `laboratorios`";
+    $result = mysqli_query($strcon,$sql) or die("Erro ao retornar dados");
+    $num_rows = mysqli_num_rows($result);
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
+
+        
+}else{
     header("Location: login.php");
 }
 ?>
@@ -57,18 +72,21 @@ if ($_SESSION['login'] == '') {
                     <li>Opções</li>
                 </ul>
                 <?php
-                    $xml=simplexml_load_file("../db/laboratorios.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
-                
-                    foreach($xml->children() as $ch){
-                        echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
-                        echo "<li>$ch->nome</li>";
-                        echo "<li>$ch->email</li>";
-                        echo "<li>$ch->cnpj</li>";
-                        echo "<li>";
-                        echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_lab.php?cnpj=$ch->cnpj'>Ver mais</a></button>";
-                        echo "</li>";
-                        echo "</ul>";
-                    }
+                    // $xml=simplexml_load_file("../db/laboratorios.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
+                    if ($num_rows > 0) {
+                        foreach($res as $ch){
+                            echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
+                            echo "<li>$ch->nome</li>";
+                            echo "<li>$ch->email</li>";
+                            echo "<li>$ch->cnpj</li>";
+                            echo "<li>";
+                            echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../admin/info_lab.php?cnpj=$ch->cnpj'>Ver mais</a></button>";
+                            echo "</li>";
+                            echo "</ul>";
+                        }
+                    }  else{
+                        echo '<div class="text-center m-2"> Não há médicos cadastrados </div>';
+                    } 
                 ?>
         </div>
     </div>

@@ -32,7 +32,8 @@ try{
         cnpj VARCHAR(80) NOT NULL,
         nome VARCHAR(80) NOT NULL,
         end VARCHAR(120) NOT NULL,
-        telefone INT NOT NULL,
+        email VARCHAR(250) NOT NULL,
+        telefone VARCHAR(20) NOT NULL,
         tipo_exame VARCHAR(250) NOT NULL, 
         password VARCHAR(80) NOT NULL,
         PRIMARY KEY(cnpj));";

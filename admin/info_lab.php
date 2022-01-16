@@ -3,6 +3,18 @@ session_start();
 
 if ($_SESSION['login'] != '') {
     $cnpj_url = $_GET['cnpj'];
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "BemEstarSaude";
+    $strcon = mysqli_connect($server, $user, $pass, $db); 
+    $sql = "SELECT * FROM `laboratorios` WHERE cnpj = $cnpj_url";
+    $result = mysqli_query($strcon,$sql) or die("Erro ao retornar dados");
+
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 } else {
     header('Location: login.php');
 }
@@ -27,7 +39,7 @@ if ($_SESSION['login'] != '') {
                     <?php
                         $xml=simplexml_load_file("../db/laboratorios.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
                     
-                        foreach($xml->children() as $ch){
+                        foreach($res as $ch){
                             if ($ch->cnpj == $cnpj_url) {
                                 echo "<div> <b>CNPJ:</b> <span> $ch->cnpj </span> </div>";
                                 echo "<br>";
@@ -39,7 +51,7 @@ if ($_SESSION['login'] != '') {
                                 echo "<br>";                           
                                 echo "<div> <b>E-mail:</b> <span> $ch->email </span> </div>";
                                 echo "<br>";
-                                echo "<div> <b>Tipo de Exame:</b> <span> $ch->tipoexame </span> </div>";
+                                echo "<div> <b>Tipo de Exame:</b> <span> $ch->tipo_exame </span> </div>";
                                 
                             } 
                         }
