@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if ($_SESSION['crm'] != '') {
     $error = false;
@@ -12,8 +12,6 @@ if ($_SESSION['crm'] != '') {
         $obs = $_POST['obs'];
         $receita = $_POST['receita'];
         $data = $_POST['data'];
-
-        include '../db/db_connect.php';
         
         $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome', '$cpf', '$crm', '$data', '$receita', '$obs');";
 

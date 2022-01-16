@@ -1,10 +1,8 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if ($_SESSION['crm'] != '') {
     $cpf_url = $_GET['cpf'];
-
-    include '../db/db_connect.php';
 
     $sql = "SELECT * FROM `consultas` WHERE cpf_paciente = $cpf_url";
 

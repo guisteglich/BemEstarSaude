@@ -1,12 +1,10 @@
 <?php
+include '../db/db_connect.php';
 
-session_start();
 if ($_SESSION['crm'] == '') {
     header('Location: login.php');
 } else {
     $crm = $_SESSION['crm'];
-
-    include '../db/db_connect.php';
 
     $sql = "SELECT * FROM `consultas`";
 

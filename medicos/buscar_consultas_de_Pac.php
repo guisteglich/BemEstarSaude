@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if($_SESSION['crm'] != '') {
     $encontrado = false;
@@ -7,8 +7,6 @@ if($_SESSION['crm'] != '') {
 
     if(isset($_POST['BuscaConPac'])) {
         $cpf = $_POST['cpf'];
-
-        include '../db/db_connect.php';
 
         $sql = "SELECT * FROM `consultas` WHERE cpf_paciente = $cpf";
 
