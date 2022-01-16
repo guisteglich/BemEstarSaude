@@ -65,7 +65,7 @@ if ($_SESSION['cnpj'] == '') {
                 </li>
             </ul>
         </aside>
-        <div class="flex flex-col mx-5 w-full h-screen">
+        <div class="flex flex-col mx-5 w-full h-screen overflow-auto">
             <header class="flex flex-row mt-3 items-center justify-between">
                 <h1 class="text-2xl	font-semibold">Laboratórios</h1>
                 <div class="flex items-center">
@@ -115,47 +115,47 @@ if ($_SESSION['cnpj'] == '') {
                     }
                 ?>
         </div>
-        <div>
-            <div> Consultas por período </div>
-            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_exames" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                
-                <label>Data inicio: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_start" id="data" onfocusout="is_empty(this)">
-                
+        <div class='flex w-ful justify'>
+            <div class='w-1/2 px-5'>
+                <div> Consultas por período </div>
+                <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg w-full' name="count_exames" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    
+                    <label>Data inicio: </label>
+                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_start" id="data" onfocusout="is_empty(this)">
+                    
 
-                <label>Data fim: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_end" id="data" onfocusout="is_empty(this)">
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_exames" value="Visualizar número de consultas" onclick="send_form()">
+                    <label>Data fim: </label>
+                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_end" id="data" onfocusout="is_empty(this)">
+                    <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_exames" value="Visualizar número de consultas" onclick="send_form()">
+                    
+                </form>
                 
-            </form>
-            
-            <?php
-                if (isset($formated_data_start)){
-                    echo "<div>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas exame(s)</div>";
-                }
-                
-            ?>
+                <?php
+                    if (isset($formated_data_start)){
+                        echo "<div class='my-2'>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas exame(s)</div>";
+                    }
+                    
+                ?>
+            </div>
 
-        </div>
-
-        <div>
-            <div> Consultas anual </div>
-            <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_exames_anual" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <div class='w-1/2 px-5'>
+                <div> Consultas anual </div>
+                <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg w-full' name="count_exames_anual" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    
+                    <label>Ano: </label>
+                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="year" id="data" onfocusout="is_empty(this)">
+                    
+                    <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_exames_anual" value="Visualizar número de consultas anuais" onclick="send_form()">
+                    
+                </form>
                 
-                <label>Ano: </label>
-                <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="year" id="data" onfocusout="is_empty(this)">
-                
-                <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_exames_anual" value="Visualizar número de consultas anuais" onclick="send_form()">
-                
-            </form>
-            
-            <?php
-                if (isset($data_year)){
-                    echo "<div>O total de consultas no ano de $data_year foi de $num_rows_consultas_anuais exame(s)</div>";
-                    echo "<div>A média de consultas no ano de $data_year foi de $media_num_rows_consultas_anuais exame(s)</div>";
-                }
-            ?>
-
+                <?php
+                    if (isset($data_year)){
+                        echo "<div class='my-2>O total de consultas no ano de $data_year foi de $num_rows_consultas_anuais exame(s)</div>";
+                        echo "<div class='my-2'>A média de consultas no ano de $data_year foi de $media_num_rows_consultas_anuais exame(s)</div>";
+                    }
+                ?>
+            </div>
         </div>
     </div>
 </body>
