@@ -89,13 +89,14 @@ while ($i <= 4) {
 $nome = array('Mateus', 'Andrews', 'Guilherme', 'João', 'Robledo');
 $cpf = array('15338260050', '47469441050', '88850783035', '78296304023', '17680046093');
 $crm = array('111', '222', '333', '444', '555');
-$data = array('2021-04-31', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
+$data = array('31/04/2021', '23/05/2021-', '22/02/2021', '22/02/2021', '31/04/2021');
+$data_consulta_db = array('2021-04-31', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
 $receita = array('Diclofenaco', 'Proparoxina', 'Creatina', 'Analgesico', 'Vitamina D');
 $obs = array('2 por dia', 'A cada 6 horas', '3  vezes na semana', '3 por dia', '4 por dia');
 
 $i = 0;
 while ($i <= 4) {
-    $query =  "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome[$i]', '$cpf[$i]', '$crm[$i]', '$data[$i]', '$receita[$i]', '$obs[$i]');";
+    $query =  "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, data_consulta_db, receita, obs) VALUES('$nome[$i]', '$cpf[$i]', '$crm[$i]','$data[$i]', '$data_consulta_db[$i]', '$receita[$i]', '$obs[$i]');";
     $result = mysqli_query($connect, $query);
     if ($result) {
         echo 'Consulta ' , $i , ' cadastrado com sucesso! <br>';
@@ -109,13 +110,14 @@ while ($i <= 4) {
 $nome = array('Mateus', 'Andrews', 'Guilherme', 'João', 'Robledo');
 $cpf = array('15338260050', '47469441050', '88850783035', '78296304023', '17680046093');
 $cnpj = array('98562258040355', '18262148506167', '38363128201124', '62562118405165', '92263556070835');
-$data = array('2021-05-22', '2021-04-10', '2021-06-21', '2021-06-30', '2021-11-12');
+$data = array('31/04/2021', '23/05/2021', '22/02/2021', '22/02/2021', '31/04/2021');
+$data_exame_db = array('2021-04-31', '2021-05-23', '2021-02-22', '2021-05-22', '2022-01-02');
 $tipo = array('Colesterol ', 'Hemograma', 'Creatina', 'TGO', 'Exame de urina');
 $resultado = array('Normal', 'Normal', 'Abaixo', 'Abaixo', 'Normal');
 
 $i = 0;
 while ($i <= 4) {
-    $query =  "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado) VALUES('$nome[$i]', '$cpf[$i]', '$cnpj[$i]', '$data[$i]', '$tipo[$i]', '$resultado[$i]');";
+    $query =  "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, data_exame_db, tipo_exame, resultado) VALUES('$nome[$i]', '$cpf[$i]', '$cnpj[$i]', '$data[$i]', '$data_exame_db[$i]', '$tipo[$i]', '$resultado[$i]');";
     $result = mysqli_query($connect, $query);
     if ($result) {
         echo 'Exame ' , $i , ' cadastrado com sucesso! <br>';
