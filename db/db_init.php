@@ -48,7 +48,7 @@ try{
         idade INT NOT NULL, 
         password VARCHAR(80) NOT NULL,
         PRIMARY KEY(cpf));";
-    $conn->exec($sql_paci);
+    $conn->exec($sql_pac);
     echo "Tabela de pacientes foi criada! <br>";
 
     $sql_users = "CREATE TABLE users (
