@@ -1,9 +1,9 @@
 <?php
-session_start();
-
+include '../db/db_connect.php';    
+           
 if ($_SESSION['cnpj'] != '') {
-    $error = false;
     $confirmar = false;
+    $error = false;
 
     if(isset($_POST['CadEx'])) {
         $cnpj = $_SESSION['cnpj'];
@@ -12,56 +12,24 @@ if ($_SESSION['cnpj'] != '') {
         $data = $_POST['data'];
         $tipoexame = $_POST['tipoexame'];
         $resultado = $_POST['resultado'];
-    
-    //     $xml=simplexml_load_file("../db/exames.xml") or die ("Erro ao abrir arquivo de exames!");
+            
+        $query  = "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado) VALUES('$nome', '$cpf', '$cnpj', '$data', '$tipoexame', '$resultado');";
 
-    //     foreach($xml->children() as $ch) {
-    //         if ($ch->cnpj == $cnpj){
-    //             if ($ch->cpf == $cpf) {
-    //                 if ($ch->data == $data) {
-    //                     $error = true;    
-    //                 }
-    //             }
-    //         }
-    // }
+        $result = mysqli_query($connect, $query);
 
-    // if ($error == false){
-    //     $add = $xml->addChild("exame"); 
-    //     $add -> addChild("nome", $nome);
-    //     $add -> addChild("cpf", $cpf);
-    //     $add -> addChild("cnpj", $cnpj);
-    //     $add -> addChild("data", $data);
-    //     $add -> addChild("tipoexame", $tipoexame);
-    //     $add -> addChild("resultado", $resultado);
-
-    //     $s = simplexml_import_dom($xml);
-    //     $s->saveXML('../db/exames.xml') or die ('Erro ao salvar exame');
-    //     header('Location: index.php');
-    //     $confirmar = true;
-        
-    //     }
-    try{
-        $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-        //$conn = new PDO("mysql:host=$server", $user, $pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-        $sql = sprintf("INSERT INTO exames (nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado)
-        VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $cnpj, $data, $tipoexame, $resultado);
-        $conn->exec($sql);
-    
+        if ($result) {
+            header('Location: index.php');
+            exit();
+        } else {
+            echo 'Error '.mysqli_error($connect);
+            exit();
         }
-        catch(PDOException $e){
-            echo $sql . "<br" . $e->getMessage();
-        }
-        
-        $conn = null;
-        header('Location: info_exames.php');
     }
-    
 } else {
     header('Location: login.php');
 }
 ?>
+        
 
 <!DOCTYPE html>
 
@@ -80,33 +48,34 @@ if ($_SESSION['cnpj'] != '') {
                 <div class='flex justify-center mb-5'>
                     <img class='w-64' src="../public/images/logo2.png">
                 </div>
-        <label>Insira o CPF do paciente:</label>
-        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="cpf" name="cpf"  onfocusout="is_cpf()">
+            <label>Insira o CPF do paciente:</label>
+            <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="cpf" name="cpf"  onfocusout="is_cpf()">
 
-        <label>Insira o nome do paciente:</label>
-        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="nome" name="nome" onfocusout="is_valid_name()">
+            <label>Insira o nome do paciente:</label>
+            <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="nome" name="nome" onfocusout="is_valid_name()">
 
-        <label>Data do exame:</label>
-        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" id="data" name="data" onfocusout="is_empty(this)">
+            <label>Data do exame:</label>
+            <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" id="data" name="data" onfocusout="is_empty(this)">
 
-        <label>Tipo de exame:</label>
-        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="tipoexame" name="tipoexame" onfocusout="is_empty(this)">
+            <label>Tipo de exame:</label>
+            <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="tipoexame" name="tipoexame" onfocusout="is_empty(this)">
 
-        <label>Resultado:</label>
-        <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="resultado" name="resultado" onfocusout="is_empty(this)">
-        <br>
-        <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadEx" value="Cadastrar Exame" onclick="send_form()">
-        <?php
-            if ($error) {
-                echo '<p> Exame com esse paciente já está cadastrado para esse dia </p>' ; 
-            }
-            else {
-                if ($confirmar == true) {
-                    echo 'Cadastrado com sucesso!';
+            <label>Resultado:</label>
+            <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" id="resultado" name="resultado" onfocusout="is_empty(this)">
+            <br>
+            <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadEx" value="Cadastrar Exame" onclick="send_form()">
+            <?php
+                if ($error) {
+                    echo '<p> Exame com esse paciente já está cadastrado para esse dia </p>' ; 
                 }
-            }
-            ?>
-            
-        </form>
+                // else {
+                //     if ($confirmar == true) {
+                //         echo 'Cadastrado com sucesso!';
+                //     }
+                // }
+                ?>
+                
+            </form>
+        </div>
     </body>
 </html>

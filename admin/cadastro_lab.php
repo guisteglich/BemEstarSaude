@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../db/db_connect.php';
 
 if ($_SESSION['login'] != '') {
 
@@ -13,12 +13,6 @@ if ($_SESSION['login'] != '') {
         $telefone = $_POST['telefone'];
         $tipoexame = $_POST['tipoexame'];
         $senha = $_POST['password'];
-
-        // $server="localhost";
-        // $user="root";
-        // $pass="";
-        // $db = "BemEstarSaude";
-        include '../db/db_connect.php';
         
         $query  = "INSERT INTO laboratorios(cnpj, nome, end, telefone, tipo_exame, email, password) VALUES('$cnpj', '$nome', '$end', '$telefone', '$tipoexame', '$email', '$senha');";
 
@@ -31,24 +25,6 @@ if ($_SESSION['login'] != '') {
             echo 'Error '.mysqli_error($connect);
             exit();
         }
-
-        // try{
-        //     $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-        //     //$conn = new PDO("mysql:host=$server", $user, $pass);
-        //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        //     $sql = sprintf("INSERT INTO laboratorios
-        //     VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');", $cnpj, $nome, $end, $telefone, $tipoexame, $senha);
-        //     $conn->exec($sql);
-        
-        //     }
-        // catch(PDOException $e){
-        //     echo $sql . "<br" . $e->getMessage();
-        // }
-        
-        // $conn = null;
-        
-        // header('Location: index.php');
     }
 } else {
     header('Location: login.php');
