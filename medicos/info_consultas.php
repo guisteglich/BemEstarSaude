@@ -26,7 +26,7 @@ if ($_SESSION['crm'] != '') {
         <title>Informações de consultas - Bem Estar Saúde</title>
     </head>
     <body class='bg-gray-200'>
-        <div class='flex justify-center items-center w-screen h-screen'>
+        <div class='flex justify-center items-center'>
             <div class='flex p-10 flex-col
              w-2/4 bg-white rounded-lg'>
                 <div class='flex justify-center mb-5'>

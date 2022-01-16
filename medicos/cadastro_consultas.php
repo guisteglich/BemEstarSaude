@@ -2,9 +2,6 @@
 include '../db/db_connect.php';
 
 if ($_SESSION['crm'] != '') {
-    $error = false;
-    $confirmar = false;
-
     if(isset($_POST['CadCon'])) {
         $crm = $_SESSION['crm'];
         $nome = $_POST['nome'];
@@ -12,8 +9,10 @@ if ($_SESSION['crm'] != '') {
         $obs = $_POST['obs'];
         $receita = $_POST['receita'];
         $data = $_POST['data'];
+        $date=date_create($data);
+        $formated_data = date_format($date,"d/m/Y");
         
-        $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome', '$cpf', '$crm', '$data', '$receita', '$obs');";
+        $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome', '$cpf', '$crm', '$formated_data', '$receita', '$obs');";
 
         $result = mysqli_query($connect, $query);
 
@@ -24,23 +23,6 @@ if ($_SESSION['crm'] != '') {
             echo 'Error '.mysqli_error($connect);
             exit();
         }
-
-        // try{
-        //     $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-        //     //$conn = new PDO("mysql:host=$server", $user, $pass);
-        //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        //     $sql = sprintf("INSERT INTO consultas (nome, cpf_paciente, crm_medico, data_consulta, receita, obs)
-        //     VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $crm, $data, $receita, $obs);
-        //     $conn->exec($sql);
-        
-        //     }
-        //     catch(PDOException $e){
-        //         echo $sql . "<br" . $e->getMessage();
-        //     }
-            
-        //     $conn = null;
-        //     header('Location: info_consultas.php');
     }
 } else {
     header('Location: login.php');
@@ -76,16 +58,7 @@ if ($_SESSION['crm'] != '') {
                 <label>Observações: </label>
                 <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="text" name="obs" id="obs" onfocusout="is_empty(this)">
                 <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="CadCon" value="Confirmar Consulta" onclick="send_form()">
-                <?php
-                    if ($error) {
-                        echo '<p> Consulta com esse paciente já está cadastrada neste dia </p>' ; 
-                    }
-                    else {
-                        if ($confirmar == true) {
-                            echo "<script> alert('Cadastrado com sucesso!')</script>:";
-                        }
-                    }
-                    ?>
+                
             </form>
         </div>
     </body>
