@@ -11,19 +11,6 @@ if ($_SESSION['login'] != '') {
         $crm = $_POST['crm'];
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
-    
-        // $xml=simplexml_load_file("../db/medicos.xml") or die ("Erro ao abrir arquivo de médicos!");
-        // foreach($xml->children() as $ch) {
-        //     if ($ch->crm == $crm) {
-                
-        //         $posicao = $contador;
-        //     }
-        //     $contador= $contador+1;
-        // }
-        // $xml->medico[$posicao]->$alterar = $valor_novo;
-        // $s = simplexml_import_dom($xml);
-        // $s->saveXML ('../db/medicos.xml');
-        // $sucesso = true;
 
         $server="localhost";
         $user="root";
@@ -31,7 +18,6 @@ if ($_SESSION['login'] != '') {
         $db = "BemEstarSaude";
 
         $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-        //$conn = new PDO("mysql:host=$server", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $sql = "UPDATE medicos SET $alterar = '$valor_novo' WHERE crm = $crm";

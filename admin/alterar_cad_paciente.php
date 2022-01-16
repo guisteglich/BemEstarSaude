@@ -10,18 +10,6 @@ if($_SESSION['login'] != '') {
         $cpf = $_POST['cpf'];
         $alterar = $_POST['novoValor'];
         $valor_novo = $_POST['valorNovo'];
-    
-        // $xml=simplexml_load_file("../db/pacientes.xml") or die ("Erro ao abrir arquivo de pacientes!");
-        // foreach($xml->children() as $ch) {
-        //     if ($ch->cpf == $cpf) {
-        //         $posicao = $contador;
-        //     }
-        //     $contador= $contador+1;
-        // }
-        // $xml->paciente[$posicao]->$alterar = $valor_novo;
-        // $s = simplexml_import_dom($xml);
-        // $s->saveXML ('../db/pacientes.xml');
-        // $sucesso = true;
 
         $server="localhost";
         $user="root";
@@ -29,13 +17,10 @@ if($_SESSION['login'] != '') {
         $db = "BemEstarSaude";
 
         $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-        //$conn = new PDO("mysql:host=$server", $user, $pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-        $sql = sprintf("UPDATE pacientes
-        SET '%s' = '%s'
-        WHERE cpf = '%s';", $alterar, $valor_novo, $cpf);
+        $sql = "UPDATE pacientes SET $alterar = '$valor_novo' WHERE cpf = $cpf";
+        $conn->query($sql);
 
         header('Location: pacientes.php');
     }
