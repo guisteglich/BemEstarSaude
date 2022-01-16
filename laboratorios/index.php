@@ -132,7 +132,7 @@ if ($_SESSION['cnpj'] == '') {
                 
                 <?php
                     if (isset($formated_data_start)){
-                        echo "<div class='my-2'>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas exame(s)</div>";
+                        echo "<div class='my-2'>O total de exames no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas exame(s)</div>";
                     }
                     
                 ?>
@@ -151,8 +151,8 @@ if ($_SESSION['cnpj'] == '') {
                 
                 <?php
                     if (isset($data_year)){
-                        echo "<div class='my-2>O total de consultas no ano de $data_year foi de $num_rows_consultas_anuais exame(s)</div>";
-                        echo "<div class='my-2'>A média de consultas no ano de $data_year foi de $media_num_rows_consultas_anuais exame(s)</div>";
+                        echo "<div class='my-2'>O total de exames no ano de $data_year foi de $num_rows_consultas_anuais exame(s)</div>";
+                        echo "<div class='my-2'>A média de exames no ano de $data_year foi de $media_num_rows_consultas_anuais exame(s)</div>";
                     }
                 ?>
             </div>

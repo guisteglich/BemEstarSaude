@@ -33,7 +33,7 @@ if ($_SESSION['crm'] == '') {
         $date_end = date_create($data_end);
         $formated_data_end = date_format($date_end,"d/m/Y");
 
-        $query = "SELECT * FROM consultas WHERE (data_consulta_db BETWEEN '$data_start' AND '$data_end')";
+        $query = "SELECT * FROM consultas WHERE (data_consulta_db BETWEEN '$data_start' AND '$data_end') AND crm_medico = $crm";
 
         $results = mysqli_query($connect, $query);
         $num_rows_consultas = mysqli_num_rows($results);
@@ -45,7 +45,7 @@ if ($_SESSION['crm'] == '') {
 
     if(isset($_POST['count_consulta_anual'])) {
         $data_year = $_POST['year'];
-        $query_anual = "SELECT * FROM consultas WHERE YEAR(data_consulta_db) = $data_year";
+        $query_anual = "SELECT * FROM consultas WHERE YEAR(data_consulta_db) = $data_year AND crm_medico = $crm";
 
         $results_year = mysqli_query($connect, $query_anual);
         $num_rows_consultas_anuais = mysqli_num_rows($results_year);
