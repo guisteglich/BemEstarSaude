@@ -14,6 +14,20 @@ try{
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Conectado! <br/>";
 
+    $sql_admin = "CREATE TABLE admin (
+        id_admin INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        username VARCHAR(80) NOT NULL,
+        password VARCHAR(80) NOT NULL,
+        PRIMARY KEY(id_admin));";
+    $conn->exec($sql_admin);
+    echo "Tabela de admin foi criada! <br>";
+
+    $username = 'admin';
+    $password = 'admin123';
+    $sql_cadastro_admin  = "INSERT INTO admin(username, password) VALUES('$username', '$password');";
+    $conn->exec($sql_cadastro_admin);
+    echo "Admin cadastrado com sucesso! <br>";
+
     $sql_lab = "CREATE TABLE laboratorios (
         cnpj INT UNSIGNED NOT NULL,
         nome VARCHAR(80) NOT NULL,
@@ -23,7 +37,7 @@ try{
         password VARCHAR(80) NOT NULL,
         PRIMARY KEY(cnpj));";
     $conn->exec($sql_lab);
-    echo "Tabela de lab foi criada!";
+    echo "Tabela de lab foi criada! <br>";
 
 
     $sql_med = "CREATE TABLE medicos (
@@ -56,11 +70,7 @@ try{
         password VARCHAR(80) NOT NULL,
         PRIMARY KEY (login));";
     $conn->exec($sql_users);
-    echo "Tabela de adms foi criada! <br>";
-
-    $sql_admin = sprintf("INSERT INTO users
-            VALUES ('%s', '%s');", $login, $password);
-            $conn->exec($sql_admin);
+    echo "Tabela de usuarios foi criada! <br>";
 
     $sql_exames = "CREATE TABLE exames (
         id_exame INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -74,7 +84,7 @@ try{
         FOREIGN KEY fk_ExamePaciente (cpf_paciente) REFERENCES pacientes(cpf),
         FOREIGN KEY fk_ExameLab (cnpj_lab) REFERENCES laboratorios(cnpj));";
     $conn->exec($sql_exames);
-    echo "Tabela de exames foi criada!";
+    echo "Tabela de exames foi criada! <br>";
         
     $sql_consultas = "CREATE TABLE consultas (
         id_consulta INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -89,18 +99,17 @@ try{
         FOREIGN KEY fk_ConsultaMed (crm_medico) REFERENCES medicos(crm));";
     $conn->exec($sql_consultas);
     echo "Tabela de consultas foi criada!";
-    
 }
 
 catch(PDOException $e){
-    echo $sql_lab . "<br" . $e->getMessage();
-    echo $sql_med . "<br" . $e->getMessage();
-    echo $sql_pac . "<br" . $e->getMessage();
-    echo $sql_users . "<br" . $e->getMessage();
-    echo $sql_exames . "<br" . $e->getMessage();
-    echo $sql_consultas . "<br" . $e->getMessage();        
+    echo $sql_admin . "<br>" . $e->getMessage();
+    echo $sql_lab . "<br>" . $e->getMessage();
+    echo $sql_med . "<br>" . $e->getMessage();
+    echo $sql_pac . "<br>" . $e->getMessage();
+    echo $sql_users . "<br>" . $e->getMessage();
+    echo $sql_exames . "<br>" . $e->getMessage();
+    echo $sql_consultas . "<br>" . $e->getMessage();        
 }
 
 $conn = null;
-
 ?>
