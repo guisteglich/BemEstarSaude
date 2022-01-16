@@ -12,7 +12,7 @@ if ($_SESSION['crm'] != '') {
         $date=date_create($data);
         $formated_data = date_format($date,"d/m/Y");
         
-        $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome', '$cpf', '$crm', '$formated_data', '$receita', '$obs');";
+        $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, data_consulta_db, receita, obs) VALUES('$nome', '$cpf', '$crm', '$formated_data', '$data', '$receita', '$obs');";
 
         $result = mysqli_query($connect, $query);
 

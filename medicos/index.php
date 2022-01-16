@@ -5,16 +5,42 @@ if ($_SESSION['crm'] == '') {
     header('Location: login.php');
 } else {
     $crm = $_SESSION['crm'];
+    $encontrado = false;
+    $error = false;
 
     $sql = "SELECT * FROM `consultas`";
 
     $result = mysqli_query($connect, $sql) or die("Erro ao retornar dados");
 
-    // $row = mysqli_num_rows($result);
+    $num_rows = mysqli_num_rows($result);
     
     while($r=mysqli_fetch_object($result))
     {
         $res[]=$r;
+    }
+    if ($num_rows >= 1) {
+        $encontrado = true; 
+    } else {
+        $error = true;
+    }
+
+    if(isset($_POST['count_consulta'])) {
+        $data_start = $_POST['data_start'];
+        $date_start = date_create($data_start);
+        $formated_data_start = date_format($date_start,"d/m/Y");
+
+        $data_end = $_POST['data_end'];
+        $date_end = date_create($data_end);
+        $formated_data_end = date_format($date_end,"d/m/Y");
+
+        $query = "SELECT * FROM consultas WHERE (data_consulta_db BETWEEN '$data_start' AND '$data_end')";
+
+        $results = mysqli_query($connect, $query);
+        $num_rows_consultas = mysqli_num_rows($results);
+        while($r=mysqli_fetch_object($results))
+        {
+            $resultados[]=$r;
+        }
     }
 }
 ?>
@@ -71,20 +97,44 @@ if ($_SESSION['crm'] == '') {
                         <li>Nome</li>
                         <li>Opções</li>
                     </ul>
-                    <?php                    
-                        foreach($res as $ch){
-                            if ($ch->crm_medico == $crm) {
-                                echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
-                                echo "<li>$ch->data_consulta</li>";
-                                echo "<li>$ch->cpf_paciente</li>";
-                                echo "<li>$ch->nome</li>";
-                                echo "<li>";
-                                echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../medicos/info_consultas.php?cpf=$ch->cpf_paciente'>Ver mais</a></button>";
-                                echo "</li>";
-                                echo "</ul>";                          
-                            } 
+                    <?php
+                        if ($error) {
+                            echo "<div class='text-center mt-2'> Nenhuma consulta cadastrada </div>"; 
+                        }
+                        if ($encontrado) {              
+                            foreach($res as $ch){
+                                if ($ch->crm_medico == $crm) {
+                                    echo "<ul class='grid grid-cols-4 py-4 border-b-2'>";
+                                    echo "<li>$ch->data_consulta</li>";
+                                    echo "<li>$ch->cpf_paciente</li>";
+                                    echo "<li>$ch->nome</li>";
+                                    echo "<li>";
+                                    echo "<button class='bg-green-400 hover:bg-green-500 w-auto h-8 px-4 rounded-md text-white'><a href='../medicos/info_consultas.php?cpf=$ch->cpf_paciente'>Ver mais</a></button>";
+                                    echo "</li>";
+                                    echo "</ul>";                          
+                                } 
+                            }
                         }
                     ?>
+                </div>
+                <div>
+                <form class='flex p-10 flex-col w-2/4 bg-white rounded-lg' name="count_consulta" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    
+                    <label>Data inicio: </label>
+                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_start" id="data" onfocusout="is_empty(this)">
+                    
+
+                    <label>Data fim: </label>
+                    <input class='border mb-2 border-gray-200 text-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-green-400 px-3 h-9' type="date" name="data_end" id="data" onfocusout="is_empty(this)">
+                    <input class='rounded-full w-auto h-9 mt-5 bg-green-400 text-white hover:bg-green-300 cursor-pointer' type="submit" name="count_consulta" value="Visualizar número de consultas" onclick="send_form()">
+                    
+                </form>
+                
+                <?php
+                    echo "<div>O total de consultas no período de $formated_data_start até $formated_data_end foi de $num_rows_consultas consulta(s)</div>";
+                ?>
+
+                </div>
             </div>
         </div>
     </body>

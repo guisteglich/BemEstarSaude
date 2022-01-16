@@ -15,7 +15,7 @@ if ($_SESSION['cnpj'] != '') {
         $tipoexame = $_POST['tipoexame'];
         $resultado = $_POST['resultado'];
             
-        $query  = "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, tipo_exame, resultado) VALUES('$nome', '$cpf', '$cnpj', '$formated_data', '$tipoexame', '$resultado');";
+        $query  = "INSERT INTO exames(nome, cpf_paciente, cnpj_lab, data_exame, data_exame_db, tipo_exame, resultado) VALUES('$nome', '$cpf', '$cnpj', '$formated_data', '$data', '$tipoexame', '$resultado');";
 
         $result = mysqli_query($connect, $query);
 
