@@ -54,7 +54,7 @@ if ($_SESSION['login'] != '') {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
             $sql = sprintf("INSERT INTO pacientes
-            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", $cpf, $nome, $end, $telefone, $email, $genero, $idade, $senha);
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');", $cpf, $nome, $end, $telefone, $email, $genero, $idade);
             $conn->exec($sql);
         
             }

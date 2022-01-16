@@ -13,48 +13,36 @@ if ($_SESSION['crm'] != '') {
         $receita = $_POST['receita'];
         $data = $_POST['data'];
 
-        // $xml=simplexml_load_file("../db/consultas.xml") or die ("Erro ao abrir arquivo de consultas!");
+        include '../db/db_connect.php';
+        
+        $query  = "INSERT INTO consultas(nome, cpf_paciente, crm_medico, data_consulta, receita, obs) VALUES('$nome', '$cpf', '$crm', '$data', '$receita', '$obs');";
 
-        // foreach($xml->children() as $ch) {
-        //     if ($ch->crm == $crm){
-        //         if ($ch->cpf == $cpf) {
-        //             if ($ch->data == $data) {
-        //                 $error = true;    
-        //             }
-        //         }
+        $result = mysqli_query($connect, $query);
+
+        if ($result) {
+            header('Location: index.php');
+            exit();
+        } else {
+            echo 'Error '.mysqli_error($connect);
+            exit();
+        }
+
+        // try{
+        //     $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
+        //     //$conn = new PDO("mysql:host=$server", $user, $pass);
+        //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        //     $sql = sprintf("INSERT INTO consultas (nome, cpf_paciente, crm_medico, data_consulta, receita, obs)
+        //     VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $crm, $data, $receita, $obs);
+        //     $conn->exec($sql);
+        
         //     }
-        // }
-
-        // if ($error == false){
-        //     $add = $xml->addChild("consulta"); 
-        //     $add -> addChild("nome", $nome);
-        //     $add -> addChild("cpf", $cpf);
-        //     $add -> addChild("crm", $crm);
-        //     $add -> addChild("data", $data);
-        //     $add -> addChild("receita", $receita);
-        //     $add -> addChild("obs", $obs);
-
-        //     $s = simplexml_import_dom($xml);
-        //     $s->saveXML ('../db/consultas.xml');
-        //     header('Location: index.php');
-        //     $confirmar = true;
-        // }
-        try{
-            $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
-            //$conn = new PDO("mysql:host=$server", $user, $pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-            $sql = sprintf("INSERT INTO consultas (nome, cpf_paciente, crm_medico, data_consulta, receita, obs)
-            VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", $nome, $cpf, $crm, $data, $receita, $obs);
-            $conn->exec($sql);
-        
-            }
-            catch(PDOException $e){
-                echo $sql . "<br" . $e->getMessage();
-            }
+        //     catch(PDOException $e){
+        //         echo $sql . "<br" . $e->getMessage();
+        //     }
             
-            $conn = null;
-            header('Location: info_consultas.php');
+        //     $conn = null;
+        //     header('Location: info_consultas.php');
     }
 } else {
     header('Location: login.php');

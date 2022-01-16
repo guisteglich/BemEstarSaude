@@ -29,7 +29,7 @@ try{
     echo "Admin cadastrado com sucesso! <br>";
 
     $sql_lab = "CREATE TABLE laboratorios (
-        cnpj INT UNSIGNED NOT NULL,
+        cnpj VARCHAR(80) NOT NULL,
         nome VARCHAR(80) NOT NULL,
         end VARCHAR(120) NOT NULL,
         telefone INT NOT NULL,
@@ -41,7 +41,7 @@ try{
 
 
     $sql_med = "CREATE TABLE medicos (
-        crm INT UNSIGNED NOT NULL,
+        crm VARCHAR(80) NOT NULL,
         nome VARCHAR(80) NOT NULL,
         end VARCHAR(120) NOT NULL,
         telefone VARCHAR(20) NOT NULL,
@@ -53,14 +53,14 @@ try{
     echo "Tabela de med foi criada! <br/>";
 
     $sql_pac = "CREATE TABLE pacientes (
-        cpf INT UNSIGNED NOT NULL,
+        cpf VARCHAR(80) NOT NULL,
         nome VARCHAR(80) NOT NULL,
         end VARCHAR(120) NOT NULL,
         telefone VARCHAR(20) NOT NULL,
         email VARCHAR(250) NOT NULL, 
         genero VARCHAR(250) NOT NULL,
         idade INT NOT NULL, 
-        password VARCHAR(80) NOT NULL,
+        -- password VARCHAR(80) NOT NULL,
         PRIMARY KEY(cpf));";
     $conn->exec($sql_pac);
     echo "Tabela de pacientes foi criada! <br>";
@@ -75,28 +75,30 @@ try{
     $sql_exames = "CREATE TABLE exames (
         id_exame INT UNSIGNED NOT NULL AUTO_INCREMENT,
         nome VARCHAR(80) NOT NULL,
-        cpf_paciente INT UNSIGNED NOT NULL,
-        cnpj_lab INT UNSIGNED NOT NULL,
+        cpf_paciente VARCHAR(80) NOT NULL,
+        cnpj_lab VARCHAR(80) NOT NULL,
         data_exame VARCHAR(120) NOT NULL,
         tipo_exame VARCHAR(250) NOT NULL,
         resultado VARCHAR(250) NOT NULL,
         PRIMARY KEY(id_exame),
         FOREIGN KEY fk_ExamePaciente (cpf_paciente) REFERENCES pacientes(cpf),
-        FOREIGN KEY fk_ExameLab (cnpj_lab) REFERENCES laboratorios(cnpj));";
+        FOREIGN KEY fk_ExameLab (cnpj_lab) REFERENCES laboratorios(cnpj));
+        ";
     $conn->exec($sql_exames);
     echo "Tabela de exames foi criada! <br>";
         
     $sql_consultas = "CREATE TABLE consultas (
         id_consulta INT UNSIGNED NOT NULL AUTO_INCREMENT,
         nome VARCHAR(80) NOT NULL,
-        cpf_paciente INT UNSIGNED NOT NULL,
-        crm_medico INT UNSIGNED NOT NULL,
+        cpf_paciente VARCHAR(80) NOT NULL,
+        crm_medico VARCHAR(80) NOT NULL,
         data_consulta VARCHAR(120) NOT NULL,
         receita VARCHAR(250) NOT NULL,
         obs VARCHAR(250) NOT NULL,
         PRIMARY KEY(id_consulta),
         FOREIGN KEY fk_ConsultaPaciente (cpf_paciente) REFERENCES pacientes(cpf),
-        FOREIGN KEY fk_ConsultaMed (crm_medico) REFERENCES medicos(crm));";
+        FOREIGN KEY fk_ConsultaMed (crm_medico) REFERENCES medicos(crm));
+        ";
     $conn->exec($sql_consultas);
     echo "Tabela de consultas foi criada!";
 }
