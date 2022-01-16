@@ -3,6 +3,18 @@ session_start();
 
 if ($_SESSION['login'] != '') {
     $cpf_url = $_GET['cpf'];
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "BemEstarSaude";
+    $strcon = mysqli_connect($server, $user, $pass, $db); 
+    $sql = "SELECT * FROM `pacientes` WHERE cpf = $cpf_url";
+    $result = mysqli_query($strcon,$sql) or die("Erro ao retornar dados");
+
+    while($r=mysqli_fetch_object($result))
+    {
+        $res[]=$r;
+    }
 } else {
     header('Location: login.php');
 }
@@ -27,13 +39,13 @@ if ($_SESSION['login'] != '') {
                     <?php
                         $xml=simplexml_load_file("../db/pacientes.xml") or die ("<br>Erro ao abrir arquivo de laboratório!");
                     
-                        foreach($xml->children() as $ch){
+                        foreach($res as $ch){
                             if ($ch->cpf == $cpf_url) {
                                 echo "<div> <b>CPF:</b> <span> $ch->cpf </span> </div>";
                                 echo "<br>";
                                 echo "<div> <b>Nome</b>: <span> $ch->nome </span> </div>";
                                 echo "<br>";          
-                                echo "<div> <b>Endereço:</b> <span> $ch->endereco </span> </div>";
+                                echo "<div> <b>Endereço:</b> <span> $ch->end </span> </div>";
                                 echo "<br>";                            
                                 echo "<div> <b>Teelfone:</b> <span> $ch->telefone </span> </div>";
                                 echo "<br>";                           
